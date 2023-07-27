@@ -3,5 +3,6 @@
 <%
 	response.sendRedirect("main.do");
 // login.do
+	// 테스트!!
 %>
 
