@@ -44,9 +44,10 @@ public class AnnouncementController {
 		return "main";
 	}
 	@GetMapping("announcementinsert.do")
-	public String announcementinsert(){
+	public String announcementinsert(Model model){
 		System.out.println("AnnouncementController announcementinsert() " + new Date());
-		return "announcementinsert";
+		model.addAttribute("content", "announcementinsert");
+		return "main";
 	}
 	@PostMapping("announcementinsertAf.do")
 	public String announcementinsertAf(AnnouncementDto dto,Model model) {
@@ -66,6 +67,7 @@ public class AnnouncementController {
 		AnnouncementDto ann = service.announcementdetail(seq);
 		
 		model.addAttribute("ann", ann);
+		
 		return "announcementdetail";
 	}
 	@PostMapping("announcementupdate.do")
@@ -74,6 +76,7 @@ public class AnnouncementController {
 		
 		AnnouncementDto ann = service.announcementdetail(seq);
 		model.addAttribute("ann", ann);
+		
 		return "announcementupdate";
 	}
 	

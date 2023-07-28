@@ -8,13 +8,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MainResponse mainResponse = (MainResponse)request.getAttribute("mainResponse");
-	System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
-	System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
-	
-	boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
-	boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
-
 	MemberDto dto = (MemberDto)session.getAttribute("login");
 	
 	String content = (String) request.getAttribute("content");
@@ -23,8 +16,6 @@
 	} else {
 		content = "/WEB-INF/views/"+content;
 	}
-	
-	
 %>
 
 <%-- 

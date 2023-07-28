@@ -59,7 +59,7 @@
 			<%
 				if(mem.getAuth()==3){
 					%>
-					<button type="submit" id="update">수정하기</a>
+					<button type="submit" id="update">수정하기</button>
 					<button type="submit" id="delete">삭제</button>
 					<%
 				}
