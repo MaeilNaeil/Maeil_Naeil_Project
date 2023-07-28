@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MainResponse {
 	
-	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	private LocalDateTime startWorkTime;
 	
-	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	private LocalDateTime leaveWorkTime;
 	
 	public MainResponse() {
