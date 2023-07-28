@@ -3,7 +3,6 @@ package ssg.com.maeil.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MonthlyWorkDto {
     
