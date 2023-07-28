@@ -12,6 +12,9 @@
 	<form action="calendarlist.do">
 		<button type="submit">부서일정관리</button>
 	</form>
+	<form action="leavelist.do">
+		<button type="submit">개인휴가관리</button>
+	</form>
 	<a href="workingStatus.do">일별 근무 현황</a>
 	<a href="monthlyMyWork.do">월별 나의 근무</a>
 	
