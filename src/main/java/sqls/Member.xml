@@ -1,23 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
 
-	<select id="idcheck" parameterType="java.lang.String"
-		resultType="java.lang.Integer">
-		select count(*)
-		from member
-		where id=#{id}
-	</select>
+<select id="idcheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(*)
+	from member
+	where id=#{id}
+</select>
 
-	<select id="login" parameterType="ssg.com.maeil.dto.MemberDto"
-		resultType="ssg.com.maeil.dto.MemberDto">
-		select employee_id, employee_name, employee_email, auth,
-		department_id, department_name, edate, erank
-		from maeil_member
-		where employee_id=#{employee_id} and
-		employee_password=#{employee_password}
-	</select>
+<select id="login" parameterType="ssg.com.maeil.dto.MemberDto" 
+					resultType="ssg.com.maeil.dto.MemberDto">
+	select employee_id, employee_name, employee_email, auth,
+			department_id, department_name, edate, erank, newfilename
+	from maeil_member
+	where employee_id=#{employee_id} and employee_password=#{employee_password}
+</select>
+
+<update id="changeInfo" parameterType="ssg.com.maeil.dto.MemberDto">
+
+	update maeil_member
+	set employee_email=#{employee_email}, department_name=#{department_name}
+	where employee_id=#{employee_id}
+</update>
+
+<update id="changepwdAf" parameterType="ssg.com.maeil.dto.MemberDto">
+	update maeil_member
+	set employee_password=#{newpwd}
+	where employee_id=#{employee_id} and employee_password=#{employee_password}
+</update>
+
+<select id="findid" parameterType="String" 
+					resultType="Integer">
+	select IFNULL(employee_id,"")
+	from maeil_member
+	where employee_email=#{employee_email}
+</select>
+
+<select id="emailchk" parameterType="String" 
+					resultType="Integer">
+	select count(*)
+	from maeil_member
+	where employee_email=#{employee_email}
+</select>
+
+<select id="findpwd" parameterType="ssg.com.maeil.dto.MemberDto" 
+					resultType="ssg.com.maeil.dto.MemberDto">
+	select *
+	from maeil_member
+	where employee_id=#{employee_id} and employee_email=#{employee_email}
+</select>
+
+<select id="findByEmployeeId" parameterType="Integer" 
+					resultType="ssg.com.maeil.dto.MemberDto">
+	select *
+	from maeil_member
+	where employee_id=#{employee_id}
+</select>
+
+<update id="upload" parameterType="ssg.com.maeil.dto.MemberDto">
+	update maeil_member
+	set filename=#{filename}, newfilename=#{newfilename}
+	where employee_id=#{employee_id}
+</update>
+
+<insert id="newemployee" parameterType="ssg.com.maeil.dto.MemberDto">	
+	insert into maeil_member(employee_name, employee_password, employee_email, department_id, department_name, auth, edate, erank)
+	values (#{employee_name}, #{employee_password},	 #{employee_email}, #{department_id}, #{department_name}, #{auth}, now(), #{erank})
+	
+</insert>
 
 
 </mapper>
