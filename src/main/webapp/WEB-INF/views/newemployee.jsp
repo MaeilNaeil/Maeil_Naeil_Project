@@ -20,20 +20,20 @@
 <div align="center">
     <h1>사원가입</h1>
     <hr>
-    <form action="newemployeeAf.do" method="post">
+    <form action="newemployeeAf.do" method="post" id="createId">
     <table>
         <col width="80"><col width="100"><col width="5"><col width="20">
 
         <tr>
             <th>사원이름</th>
             <td>
-                <input type="text" name="employee_name">
+                <input type="text" name="employee_name" id="employee_name">
             </td>
         </tr>		
         <tr>
             <th>비밀번호</th>
             <td>
-                <input type="text" name="employee_password">
+                <input type="text" name="employee_password" id="employee_password">
             </td>
         </tr>
         <tr>
@@ -98,14 +98,14 @@
         <tr>
         	<th>직급</th>
         	<td>
-        		<input type="text" name="erank">
+        		<input type="text" name="erank" id="erank">
         	</td>
         </tr>
     </table>
     <table>
     	 <tr>
         	<td align="center">
-        		<button type="submit">작성완료</button>
+        		<button type="button" onclick="createId()">작성완료</button>
         	</td>
         	<td>
         		<button type="reset">다시 적기</button>
@@ -167,6 +167,18 @@ $(document).ready(function() {
     	}
     });
 });
+
+
+function createId() {
+	
+	if($("#employee_name").val() == null || $("#employee_name").val() == "") {alert("이름을 입력하세요."); return; }
+	if($("#employee_password").val() == null || $("#employee_password").val() == "") {alert("비밀번호를 입력하세요.");  return; }
+	if($("#emailname").val() == null || $("#emailname").val() == "") {alert("이메일을 입력하세요."); return; }
+	if($("#department_name").val() == null || $("#department_name").val() == "") {alert("부서를 입력하세요."); return; }
+	if($("#erank").val() == null || $("#erank").val() == "") {alert("직급을 입력하세요."); return; }
+
+	  $("#createId").submit();
+	}
 
 </script>
 </body>

@@ -5,8 +5,10 @@
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<%	
 	MemberDto dto = (MemberDto)session.getAttribute("login");
+	String lowerFileName;
+
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
 		<script>
@@ -14,11 +16,17 @@
 		location.href="login.do";
 		</script>
 		<%
-	} else {
+	} 
+
+		if(dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
+			lowerFileName = dto.getNewfilename().toLowerCase();
+		} else {
+			lowerFileName = "base.PNG"; 
+		}
 	
-	}
-	String lowerFileName = dto.getNewfilename().toLowerCase();
+	/* if(lowerFileName != null){
 	System.out.println("lowerFileName 값 확인 : " + lowerFileName);
+	} */
 %>
 
 <!DOCTYPE html>
@@ -34,6 +42,41 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
+<style>
+#mainContent {
+	margin-top: 50px;
+	padding-left: 200px;
+}
+
+.imgfile {
+	width:75px;
+	height:100px;
+}
+select {
+	border-radius: 5px;
+	padding : 10px;
+	padding-left : 30px;
+	width: 250px;
+	height: 35px;
+	font-size: 1em;
+	border: 2px solid black;
+} 
+select[disabled] {
+	border-radius: 10px;
+	padding : 10px;
+	padding-left : 30px;
+	width: 445px;
+	height: 57px;
+	font-size: 1em; 
+	color: black; /* 텍스트 색상 */
+	background-color: white; /* 배경 색상 */
+	cursor: not-allowed; /* 커서 모양 */
+	border: 2px solid black; /* 테두리 스타일 */
+}
+
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -45,20 +88,20 @@
   	<div align="center">
 	<h1>MY PAGE</h1>
 </div>
-<hr/><br/>
+<hr/>
 
 <div align="center">
-<img src="http://localhost:9200/springSamples/upload/7777.png" alt="프로필 이미지" class="imgfile">
+<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
 </div>
 
 <form action="upload.do" method="post" enctype="multipart/form-data">
 <div align="center" class="profileImg">
 	
-	<br/><br/><br/>
+	<br/><br/>
 	<input type="hidden" name="employee_id" value="<%=dto.getEmployee_id() %>">
 	<input type="file" name="fileupload" id="fileupload" style="display:none;">
-	<label for="fileupload">사진 등록하기</label>
-	&nbsp;<input type="submit" value="저장">
+	<label for="fileupload" class="uploadBtn">사진 등록</label>
+	&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
 </div>
 </form>
 
@@ -162,7 +205,7 @@ function emailchkBtn() {
 				alert("사용가능한 이메일입니다");
 				saveYn = "YES";
 				return;
-			} else if ($("#employee_email").val().trim() == ("<%=dto.getEmployee_email() %>")) {
+			} else if ($("#employee_email").val().trim() == ("<%=dto.getEmployee_email()%>")) {
 				alert("현재 사용중인 이메일입니다");
 				inputEmail = $("#employee_email").val().trim();
 				saveYn = "YES";
@@ -249,7 +292,7 @@ function changeInfo() {
 		});
  	
 	}
-	
+}
 }
 
 function changePwd() {

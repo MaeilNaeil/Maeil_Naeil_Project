@@ -4,6 +4,10 @@
 <% MemberDto dto = (MemberDto)session.getAttribute("login"); %>
 <div class="item sidebar-1">
 	<p id="clock"></p>
+
+	<form action="logout.do">
+		<button type="submit">로그아웃</button>
+	</form>
 </div>
 <div class="item sidebar-2" align="center">
 	<form action="mypage.do">
@@ -28,4 +32,24 @@
 	<%
 		}
 	%>
+	<script type="text/javascript">
+function printTime() {
+	var clock = document.getElementById("clock");
+	var now = new Date();
+
+	clock.innerHTML =
+	(now.getMonth()+1) + "/" +
+	now.getDate() + " " +
+	now.getHours() + "시 " +
+	now.getMinutes() + "분";
+	/* + now.getSeconds() + " "; */
+
+	setTimeout("printTime()", 1000);
+	}
+
+	window.onload = function() {
+	printTime();  
+	};
+</script>
+	
 </div>
