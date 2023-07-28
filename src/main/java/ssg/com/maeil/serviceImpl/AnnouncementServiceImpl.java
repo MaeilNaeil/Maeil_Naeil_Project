@@ -45,6 +45,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	public boolean announcementdelete(int seq) {
 		return dao.announcementdelete(seq)>0?true:false;
 	}
+
+	@Override
+	public List<AnnouncementDto> recentThreeAnnounce() {
+		return dao.recentThreeAnnounce();
+	}
 	
 	
 }

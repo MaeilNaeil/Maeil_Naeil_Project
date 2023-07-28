@@ -93,7 +93,10 @@
 			%>
   	
   </div>
-  <div class="item content-2"><a href="announcementmain.do">공지사항</a></div>
+  <div class="item content-2">
+  	<a href="announcementmain.do">공지사항</a>
+  	<jsp:include page="/WEB-INF/views/main_announce.jsp"></jsp:include>
+  </div>
   <div class="item content-3"><p>달력</p></div>
   
   <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
