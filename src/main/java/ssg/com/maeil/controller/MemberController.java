@@ -3,6 +3,7 @@ package ssg.com.maeil.controller;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,7 @@ import com.mysql.cj.Session;
 
 import ssg.com.maeil.dto.MemberDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
+import ssg.com.maeil.service.AnnouncementService;
 import ssg.com.maeil.service.MemberService;
 import ssg.com.maeil.service.WorkingStatusService;
 import util.DateUtil;
@@ -41,6 +43,8 @@ public class MemberController {
 	@Autowired
 	WorkingStatusService workingStatusService;
 	
+	@Autowired
+	AnnouncementService announcementService;
 	
 	@RequestMapping("login.do")
 	public String login() {
@@ -78,6 +82,13 @@ public class MemberController {
     LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
 	
 	MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
+	
+	/* 공지사항 내용 최상위 3개 가져오기 */
+	List<AnnouncementDto> list = announcementService.recentThreeAnnounce();
+	model.addAttribute("announcementList", list);
+	for(AnnouncementDto a : list) {
+		System.out.println(a.toString());
+	}
 	
 	model.addAttribute("mainResponse", mainResponse);
 	return "main";

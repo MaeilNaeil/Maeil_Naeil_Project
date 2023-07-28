@@ -74,7 +74,7 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
 <h1>Leave List</h1>
 <br/>
 <br/>
-<a href = "calendarlist.do">부서일정</a>
+<a href = "main.do">메인화면</a>
 <br/>
 <br/>
 

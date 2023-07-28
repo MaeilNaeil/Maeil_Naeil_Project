@@ -19,4 +19,6 @@ public interface AnnouncementDao {
 		int announcementupdate(AnnouncementDto dto);
 		
 		int announcementdelete(int seq);
+
+		List<AnnouncementDto> recentThreeAnnounce();
 }

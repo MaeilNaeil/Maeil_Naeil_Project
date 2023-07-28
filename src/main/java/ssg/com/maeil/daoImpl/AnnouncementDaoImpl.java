@@ -43,6 +43,10 @@ public class AnnouncementDaoImpl implements AnnouncementDao{
 	public int announcementdelete(int seq) {
 		return session.update("announcementdelete",seq);
 	}
+	@Override
+	public List<AnnouncementDto> recentThreeAnnounce() {
+		return session.selectList("recentThreeAnnounce");
+	}
 	
 
 

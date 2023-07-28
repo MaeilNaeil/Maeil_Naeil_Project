@@ -58,7 +58,7 @@ th{
 <h1>Department Calendar</h1>
 <br/>
 <br/>
-<a href = "leavelist.do">휴가관리</a>
+<a href = "main.do">메인화면</a>
 <br/>
 <br/>
 
