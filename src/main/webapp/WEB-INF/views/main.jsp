@@ -8,18 +8,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MainResponse mainResponse = (MainResponse)request.getAttribute("mainResponse");
-	System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
-	System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
-	
-	boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
-	boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
-
 	MemberDto dto = (MemberDto)session.getAttribute("login");
-%>
-
-<%-- 
-<%
+	String lowerFileName;
+	
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
 		<script>
@@ -27,11 +18,25 @@
 		location.href="login.do";
 		</script>
 		<%
-	} else {
-	
 	}
+	
+		if(dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
+			lowerFileName = dto.getNewfilename().toLowerCase();
+		} else {
+			lowerFileName = "base.PNG"; 
+		}
+
+	
+	MainResponse mainResponse = (MainResponse)request.getAttribute("mainResponse");
+	System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
+	System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
+	
+	boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
+	boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
+
 %>
- --%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +50,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
+<style>
+.imgfile {
+	width:75px;
+	height:100px;
+}
+
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -54,7 +68,7 @@
   
   <div align="center" class="item content-1">
   	<%-- <p>어서오세요 <%=dto.getEmployee_name() %> 님</p> --%>
-		my profile
+		<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
 		<br>
 			<%
 				LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
@@ -92,6 +106,8 @@
 				}
 			%>
   	
+  
+  	
   </div>
   <div class="item content-2"><a href="announcementmain.do">공지사항</a></div>
   <div class="item content-3"><p>달력</p></div>
@@ -101,23 +117,6 @@
 </div>
 </body>
 <script type="text/javascript">
-function printTime() {
-	var clock = document.getElementById("clock");
-	var now = new Date();
-
-	clock.innerHTML =
-	(now.getMonth()+1) + "/" +
-	now.getDate() + " " +
-	now.getHours() + "시 " +
-	now.getMinutes() + "분";
-	/* + now.getSeconds() + " "; */
-
-	setTimeout("printTime()", 1000);
-	}
-
-	window.onload = function() {
-	printTime();  
-	};
 
 	
 /* 			const startWork = (employee_id) => {

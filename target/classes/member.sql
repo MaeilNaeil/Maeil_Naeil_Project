@@ -19,6 +19,10 @@ alter table maeil_announcement
 add
 employee_name varchar(30) not null
 
+foreign key (employee_id) references maeil_member(employee_id)
+
+
+
 select * from maeil_member
 
 select * from maeil_announcement

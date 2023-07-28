@@ -9,8 +9,14 @@ create table maeil_leave_list(
     status varchar(20) not null
 );
 
+
+alter table maeil_leave_list
+add
+foreign key(employee_id) references maeil_member(employee_id)
+
 select*
 from maeil_leave_list;
 
 delete from maeil_leave_list
 where seq=27;
+
