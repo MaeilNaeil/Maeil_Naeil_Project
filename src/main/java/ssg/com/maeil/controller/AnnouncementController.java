@@ -39,9 +39,9 @@ public class AnnouncementController {
 		model.addAttribute("announcementList", list);
 		model.addAttribute("annPage", annPage);
 		model.addAttribute("Annsearch", Annsearch);
+		model.addAttribute("content", "announcementmain");
 		
-		
-		return "announcementmain";
+		return "main";
 	}
 	@GetMapping("announcementinsert.do")
 	public String announcementinsert(){
