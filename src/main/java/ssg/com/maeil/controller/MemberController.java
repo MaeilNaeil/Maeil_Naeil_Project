@@ -1,5 +1,7 @@
 package ssg.com.maeil.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ import ssg.com.maeil.dto.MemberDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
 import ssg.com.maeil.service.MemberService;
 import ssg.com.maeil.service.WorkingStatusService;
+import util.DateUtil;
 
 @Controller
 public class MemberController {
@@ -61,8 +64,11 @@ public class MemberController {
 	// TODO : MainController 
 	// 출근시간/퇴근시간 조회 - 출/퇴근 시간 유무에 따라 버튼 활성화 유무 & 시간 출력 유무
 	WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(2);
+  
+    LocalDateTime formatStartTime = DateUtil.stringToLocalDateTime(mainTimeDto.getStartWorkTime());
+    LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
 	
-	MainResponse mainResponse = new MainResponse(mainTimeDto.getStartWorkTime(), mainTimeDto.getLeaveWorkTime());
+	MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
 	
 	model.addAttribute("mainResponse", mainResponse);
 	return "main";

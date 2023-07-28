@@ -8,52 +8,46 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class MonthlyWorkDto {
     
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    private LocalDateTime startWorkTime;
+    private String startWorkTime;
 	
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    private LocalDateTime leaveWorkTime;
+    private String leaveWorkTime;
 	
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate workingDate;
+    private String workingDate;
 	
    public MonthlyWorkDto() {
 	// TODO Auto-generated constructor stub
    }
 
-public MonthlyWorkDto(LocalDateTime startWorkTime, LocalDateTime leaveWorkTime, LocalDate workingDate) {
-	super();
-	this.startWorkTime = startWorkTime;
-	this.leaveWorkTime = leaveWorkTime;
-	this.workingDate = workingDate;
-}
+	public MonthlyWorkDto(String startWorkTime, String leaveWorkTime, String workingDate) {
+		super();
+		this.startWorkTime = startWorkTime;
+		this.leaveWorkTime = leaveWorkTime;
+		this.workingDate = workingDate;
+	}
 
-public LocalDateTime getStartWorkTime() {
-	return startWorkTime;
-}
+	public String getStartWorkTime() {
+		return startWorkTime;
+	}
 
-public void setStartWorkTime(LocalDateTime startWorkTime) {
-	this.startWorkTime = startWorkTime;
-}
+	public void setStartWorkTime(String startWorkTime) {
+		this.startWorkTime = startWorkTime;
+	}
 
-public LocalDateTime getLeaveWorkTime() {
-	return leaveWorkTime;
-}
+	public String getLeaveWorkTime() {
+		return leaveWorkTime;
+	}
 
-public void setLeaveWorkTime(LocalDateTime leaveWorkTime) {
-	this.leaveWorkTime = leaveWorkTime;
-}
+	public void setLeaveWorkTime(String leaveWorkTime) {
+		this.leaveWorkTime = leaveWorkTime;
+	}
 
-public LocalDate getWorkingDate() {
-	return workingDate;
-}
+	public String getWorkingDate() {
+		return workingDate;
+	}
 
-public void setWorkingDate(LocalDate workingDate) {
-	this.workingDate = workingDate;
-}
-   
-   
-   
-   
-   
-    
+	public void setWorkingDate(String workingDate) {
+		this.workingDate = workingDate;
+	}
 }

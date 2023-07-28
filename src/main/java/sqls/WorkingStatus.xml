@@ -10,7 +10,9 @@
 	
 	<update id="insertLeaveWork" parameterType="ssg.com.maeil.daoImpl.LeaveWorkQueryParam">
 		update maeil_working_status set leave_work_time=#{currentTime}, working_status='leave'
-		 where employee_id=#{employeeId}; 
+		 where employee_id=#{employeeId}
+		   and DATE_FORMAT(working_date, '%Y%m%d') = DATE_FORMAT(now(), '%Y%m%d');
+		 
 	</update>
 	
 	<select id="selectWorkingStatusTime" parameterType="java.lang.Integer" resultType="ssg.com.maeil.dto.WorkingStatusTimeDto">

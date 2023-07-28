@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import ssg.com.maeil.dto.MonthlyWorkDto;
 import ssg.com.maeil.dto.WorkingStatusDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
 import ssg.com.maeil.serviceImpl.WorkingStatusServiceImpl;
+import util.DateUtil;
 
 @Controller
 public class WorkingStatusController {
@@ -53,7 +55,10 @@ public class WorkingStatusController {
 			return response;
 		}
 		
-		response = new StartWorkResponse(timeDto.getStartWorkTime(), true);
+		//TODO
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime formatStartTime = LocalDateTime.parse(timeDto.getStartWorkTime(), formatter);
+		response = new StartWorkResponse(formatStartTime, true);
 		
 		return response;
 	} 
@@ -75,7 +80,9 @@ public class WorkingStatusController {
 			return response;
 		}
 		
-		response = new LeaveWorkResponse(timeDto.getLeaveWorkTime(), true);
+		LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(timeDto.getLeaveWorkTime());
+    
+		response = new LeaveWorkResponse(formatLeaveTime, true);
 		
 		return response;
 	}
@@ -90,11 +97,23 @@ public class WorkingStatusController {
 				  LocalDate.parse(inputDate, dtf) /* 요청된 날짜가 있는경우 = 해당 날짜로 화면 재랜더링*/ 
 				: LocalDate.of(now.getYear(), now.getMonth(), 1); /* 요청된 날짜가 없는경우 = 디폴트조회 = 조회당시월*/ 
 
-		List<MonthlyWorkDto> monthlyWorkList = service.getMonthlyWork(2, date);
+		List<MonthlyWorkDto> monthlyWorkDtoList = service.getMonthlyWork(2, date);
 		
-		if (monthlyWorkList.size() == 1 && monthlyWorkList.get(0) == null) {
-			monthlyWorkList = new ArrayList<>();
+		List<MonthlyWorkInfo> monthlyWorkList = new ArrayList<>();
+//		List<MonthlyWorkInfo> result = new ArrayList<>();
+//		for(MonthlyWorkDto item : monthlyWorkList) {
+//			MonthlyWorkInfo info = new MonthlyWorkInfo();
+//			info.setStartWorkTime(DateUtil.stringToLocalDateTime(item.getStartWorkTime()));
+//			info.setLeaveWorkTime(DateUtil.stringToLocalDateTime(item.getLeaveWorkTime()));
+//			info.setWorkingDate(DateUtil.stringToLocalDate(item.getWorkingDate())); 
+//			result.add(info);
+//		}
+		if (monthlyWorkDtoList.size() != 1 || monthlyWorkDtoList.get(0) != null) {
+			monthlyWorkList = monthlyWorkDtoList.stream()
+					.map(dto -> new MonthlyWorkInfo(dto))
+					.collect(Collectors.toList());
 		}
+		
 		model.addAttribute("monthlyWorkList", monthlyWorkList);
 		model.addAttribute("inquireDate", date);
 		return "monthlyMyWork";
