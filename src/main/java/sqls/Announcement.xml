@@ -60,7 +60,7 @@
   where seq=#{seq}
 </update>
 
-<update id="announcementdelete" parameterType="Integer">
+<update id="announcementdelete" parameterType="ssg.com.maeil.dto.AnnouncementDto">
 	update maeil_announcement
 	set del=1
 	where seq=#{seq}

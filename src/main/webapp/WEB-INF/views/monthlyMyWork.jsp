@@ -14,6 +14,7 @@
 <title>Monthly My Work</title>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 	<style type="text/css">
 		.fa-solid{
 			font-size: 24px;
@@ -21,6 +22,12 @@
 	</style>
 </head>
 <body>
+<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="content">
+
 <a href="main.do">main</a>
 <%
 	LocalDate date = (LocalDate) request.getAttribute("inquireDate");
@@ -140,6 +147,9 @@
 			</tr>
 		</table>
 	</div> 
+	</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 <script>
 	const minusYear = () => {

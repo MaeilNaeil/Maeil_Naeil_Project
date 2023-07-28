@@ -9,17 +9,8 @@
     pageEncoding="UTF-8"%>
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("login");
+	String lowerFileName;
 	
-	String content = (String) request.getAttribute("content");
-	if(content == null) {
-		content = "/WEB-INF/views/include/content";	
-	} else {
-		content = "/WEB-INF/views/"+content;
-	}
-%>
-
-<%-- 
-<%
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
 		<script>
@@ -27,11 +18,25 @@
 		location.href="login.do";
 		</script>
 		<%
-	} else {
-	
 	}
+	
+		if(dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
+			lowerFileName = dto.getNewfilename().toLowerCase();
+		} else {
+			lowerFileName = "base.PNG"; 
+		}
+
+	
+	MainResponse mainResponse = (MainResponse)request.getAttribute("mainResponse");
+	System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
+	System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
+	
+	boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
+	boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
+
 %>
- --%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,34 +50,73 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
+<style>
+.imgfile {
+	width:75px;
+	height:100px;
+}
+
+</style>
+
 </head>
 <body>
 <div class="container">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	<jsp:include page='<%=content + ".jsp" %>'></jsp:include>
-  	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	
+  
+  <div align="center" class="item content-1">
+  	<%-- <p>어서오세요 <%=dto.getEmployee_name() %> 님</p> --%>
+		<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
+		<br>
+			<%
+				LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
+				String startWorkTime = hasStartWorkTime ? responseStartTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
+				LocalDateTime responseLeaveTime = mainResponse.getLeaveWorkTime();
+				String leaveWorkTime = hasLeaveWorkTime ? responseLeaveTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
+				
+				if(hasStartWorkTime && hasLeaveWorkTime){
+			%>		
+				<div class="startWorkBtnWrap">	
+					<%=startWorkTime %>
+				</div>			
+				<div class="leaveWorkBtnWrap">
+					<%=leaveWorkTime %>
+				</div>
+			<%		
+				}else if(!hasStartWorkTime && !hasLeaveWorkTime){
+			%>
+				<div class="startWorkBtnWrap">	
+					<button class="startWorkBtn" onclick="startWork()"> 출근</button>
+				</div>	
+				<div class="leaveWorkBtnWrap">
+					<button class="leaveWorkBtn" onclick="leaveWork()" disabled="disabled">퇴근</button>
+				</div>
+			<%		
+				}else if(hasStartWorkTime && !hasLeaveWorkTime){
+			%>
+				<div class="startWorkBtnWrap">	
+					<%=startWorkTime %>
+				</div>
+				<div class="leaveWorkBtnWrap">
+					<button class="leaveWorkBtn" onclick="leaveWork()">퇴근</button>
+				</div>
+			<%
+				}
+			%>
+  	
+  
+  	
+  </div>
+  <div class="item content-2"><a href="announcementmain.do">공지사항</a></div>
+  <div class="item content-3"><p>달력</p></div>
+  
+  <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
  
 </div>
 </body>
 <script type="text/javascript">
-function printTime() {
-	var clock = document.getElementById("clock");
-	var now = new Date();
-
-	clock.innerHTML =
-	(now.getMonth()+1) + "/" +
-	now.getDate() + " " +
-	now.getHours() + "시 " +
-	now.getMinutes() + "분";
-	/* + now.getSeconds() + " "; */
-
-	setTimeout("printTime()", 1000);
-	}
-
-	window.onload = function() {
-	printTime();  
-	};
 
 	
 /* 			const startWork = (employee_id) => {

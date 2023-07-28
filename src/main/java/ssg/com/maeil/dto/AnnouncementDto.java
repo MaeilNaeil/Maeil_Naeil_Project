@@ -24,6 +24,21 @@ public class AnnouncementDto implements Serializable{
 	}
 
 	
+
+
+	public AnnouncementDto(int seq, int employee_id, String content, String writing_period, int auth, String type) {
+		super();
+		this.seq = seq;
+		this.employee_id = employee_id;
+		this.content = content;
+		this.writing_period = writing_period;
+		this.auth = auth;
+		this.type = type;
+	}
+
+
+
+
 	public AnnouncementDto(String title, String content, String type) {
 		super();
 		this.title = title;

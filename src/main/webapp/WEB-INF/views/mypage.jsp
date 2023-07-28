@@ -50,29 +50,47 @@
 }
 
 .imgfile {
-	width:75px;
-	height:100px;
+	width:60px;
+	height:75px;
 }
+
+.content {
+    width: 700px;
+}
+
+.mypageval {
+	border-radius: 10px;
+	padding : 5px;
+	width: 300px;
+	height: 50px;
+	font-size: 1.2em;
+}
+
 select {
-	border-radius: 5px;
+	border-radius: 10px;
 	padding : 10px;
-	padding-left : 30px;
-	width: 250px;
-	height: 35px;
-	font-size: 1em;
+	padding-left : 20px;
+	width: 300px;
+	height: 50px;
+	font-size: 1.2em;
+	color: black;
 	border: 2px solid black;
 } 
 select[disabled] {
 	border-radius: 10px;
 	padding : 10px;
-	padding-left : 30px;
-	width: 445px;
-	height: 57px;
-	font-size: 1em; 
+	padding-left : 20px;
+	width: 300px;
+	height: 50px;
+	font-size: 1.2em; 
 	color: black; /* 텍스트 색상 */
-	background-color: white; /* 배경 색상 */
 	cursor: not-allowed; /* 커서 모양 */
 	border: 2px solid black; /* 테두리 스타일 */
+}
+
+th {
+	font-size: 1.2em;
+	text-align: center;
 }
 
 </style>
@@ -86,7 +104,6 @@ select[disabled] {
   
   <div id="mainContent" class="content">
   	<div align="center">
-	<h1>MY PAGE</h1>
 </div>
 <hr/>
 
@@ -105,30 +122,30 @@ select[disabled] {
 </div>
 </form>
 
-<br/><br/><br/><hr/>
+<br/><hr/>
 
 <div class="content">
 	<table class="table">
 		<tr>
-			<th>사번&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>사번</th>
 			<td>
 				<input type="text" name="employee_id" id="employee_id" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_id() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
-			<th>이름&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>이름</th>
 			<td>
 				<input type="text" name="employee_name" id="employee_name" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_name() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
-			<th>직위&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>직위</th>
 			<td>
 				<input type="text" name="erank" id="erank" class="mypageval" style="padding-left: 30px;" value="<%=dto.getErank() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
-			<th>이메일&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>이메일</th>
 			<td>
 				<input type="text" name="employee_email" id="employee_email" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_email() %>" readonly="readonly">
 				<input type="button" onclick="emailchkBtn()" class="emailchk" name="emailchk" id="emailchk" value="확인"  style="display: none;">
@@ -136,7 +153,7 @@ select[disabled] {
 		</tr>
 
 		<tr>
-			<th>부서명&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>부서명</th>
 			<td>
 				<select disabled id="department_name" class="mypageSelecteVal">
 <%-- 				<option selected="selected" value="<%=dto.getDepartment_name() %>"><%=dto.getDepartment_name() %></option> --%>
@@ -153,7 +170,7 @@ select[disabled] {
 			</td>
 		</tr>
 		<tr>
-			<th>입사일&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>입사일&nbsp;&nbsp;</th>
 			<td>
 				<input type="text" name="edate" id="edate" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEdate().substring(0,10) %>" readonly="readonly">
 			</td>
@@ -292,7 +309,7 @@ function changeInfo() {
 		});
  	
 	}
-}
+
 }
 
 function changePwd() {

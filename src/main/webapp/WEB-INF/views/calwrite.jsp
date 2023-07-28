@@ -30,10 +30,15 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 
 </head>
 <body>
+<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="content">
 
 <h1>일정작성</h1>
 <br/>
@@ -102,7 +107,9 @@ document.getElementById("time").value = d.getHours() + ":" + d.getMinutes();
 
 
 </script>
-
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
 

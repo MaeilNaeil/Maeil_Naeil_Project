@@ -20,18 +20,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 </head>
 <body>
+	<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
+	  <div id="mainContent" class="content">
 	
 	<div align="center">
 		<h1>디테일</h1>
 		<hr>
+		
 	<form id="frm" method="post">
 	<table>
 		<tr>
 			<td>
-				<input type="hidden" name=seq value="<%=ann.getSeq() %>">
 				<input type="text" name="title" readonly="readonly" value="[<%=ann.getType() %>]<%=ann.getTitle() %>">
 			</td>
 		</tr>
@@ -59,8 +64,9 @@
 			<%
 				if(mem.getAuth()==3){
 					%>
-					<button type="submit" id="update">수정하기</button>
-					<button type="submit" id="delete">삭제</button>
+					<input type="hidden" name="seq" value="<%=ann.getSeq() %>">
+					<input type="button" id="update" value="수정하기" />
+					<input type="button" id="delete" value="삭제" />
 					<%
 				}
 			%>
@@ -75,16 +81,18 @@
 	
 	</div>
 <script type="text/javascript">
+
 $(document).ready(function(){
 	$("#update").click(function(){
-	
-		$("#frm").attr("action", "announcementupdate.do?seq="+<%=ann.getSeq() %>).submit();
+		var seq = <%=ann.getSeq() %>;
+		location.href = "announcementupdate.do?seq="+ seq;
+		
 	});
 	
 	$("#delete").click(function(){
-		$("#frm").attr("action", "announcementdelete.do").submit();
+		var seq = <%=ann.getSeq() %>;
+		location.href = "announcementdelete.do?seq=" + seq;
 	});
-	
 	
 	
 });
@@ -113,5 +121,8 @@ function clip(){
 
 
 </script>	
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
