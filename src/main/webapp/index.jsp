@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	response.sendRedirect("main.do");
-// login.do
-	// 테스트!!
-%>
 
+
+<%
+	response.sendRedirect("login.do");
+%>    

@@ -1,0 +1,31 @@
+ - front
+	연결 값 입력					|	전달할 parameter 값이 있을 시 name 값으로 전달
+
+
+
+ - controller						|	value는 연결값 method 타입등을 정해주며 애노테이션입력 및 ajax 사용시 responsebody 애노테이션까지 필요
+								웹 페이지 파일로 값을 전달해야할 경우에는 인스턴스에 model 필요
+	서비스 생성						model.addattribute("전달할 워드", 객체 내 변수)
+								return 값으로 jsp 파일 이동(설정에서 세팅해놓은 값이 .jsp 일 경우)
+					
+							|
+
+
+ - service	
+	다오 생성						|	인터페이스는 dao와 동일하게( boolean 결과가 필요한 경우 dao 와 리턴 타입이 달라질 수 있다
+								dao. --- 으로 리턴
+	
+
+ - dao
+	세션 생성						|	인터페이스에서 돌려받을 타입으로 생성자 ID값으로 변수(인스턴스 값은 parameter값)
+
+
+ - db
+	id = 연결 값					|	db에 작성된 것들은 대상 및 조건에 대한 작성이며
+								실제 동작은 dao에서 생성자를 통해 실행(인터페이스)
+								Impl 에서 오버라이드를 통해 session 값을 불러와서 리턴해준다
+	parameterType / resultType				|	
+	mysql 구문으로 대상 및 조건 작성			|
+
+
+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

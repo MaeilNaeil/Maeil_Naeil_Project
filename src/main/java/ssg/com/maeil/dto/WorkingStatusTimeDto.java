@@ -6,38 +6,42 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class WorkingStatusTimeDto {
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-	private LocalDateTime startWorkTime;
+	private String startWorkTime;
 	
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-	private LocalDateTime leaveWorkTime;
+	private String leaveWorkTime;
 	
 	public WorkingStatusTimeDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WorkingStatusTimeDto(LocalDateTime startWorkTime, LocalDateTime leaveWorkTime) {
+	public WorkingStatusTimeDto(String startWorkTime, String leaveWorkTime) {
 		super();
 		this.startWorkTime = startWorkTime;
 		this.leaveWorkTime = leaveWorkTime;
 	}
 
-	public LocalDateTime getStartWorkTime() {
+	public String getStartWorkTime() {
 		return startWorkTime;
 	}
 
-	public void setStartWorkTime(LocalDateTime startWorkTime) {
+	public void setStartWorkTime(String startWorkTime) {
 		this.startWorkTime = startWorkTime;
 	}
 
-	public LocalDateTime getLeaveWorkTime() {
+	public String getLeaveWorkTime() {
 		return leaveWorkTime;
 	}
 
-	public void setLeaveWorkTime(LocalDateTime leaveWorkTime) {
+	public void setLeaveWorkTime(String leaveWorkTime) {
 		this.leaveWorkTime = leaveWorkTime;
 	}
 	
 	public static WorkingStatusTimeDto createEmpty() {
-		return new WorkingStatusTimeDto(null, null);
+		WorkingStatusTimeDto result = new WorkingStatusTimeDto(null, null);
+		return result;
+		
 	}
+
+	
 }

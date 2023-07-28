@@ -1,3 +1,4 @@
+<%@page import="ssg.com.maeil.controller.MonthlyWorkInfo"%>
 <%@page import="ssg.com.maeil.dto.MonthlyWorkDto"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -23,7 +24,7 @@
 <a href="main.do">main</a>
 <%
 	LocalDate date = (LocalDate) request.getAttribute("inquireDate");
-	List<MonthlyWorkDto> monthlyWorkList = (List)request.getAttribute("monthlyWorkList");
+	List<MonthlyWorkInfo> monthlyWorkList = (List)request.getAttribute("monthlyWorkList");
 	
 	
     LocalDate calendarDay = date; //해당 년도와 달의 달력을 가져옴
@@ -84,11 +85,11 @@
 						if(monthlyWorkList.size() != 0){
 							System.out.println("in!!");
 							
-							for(MonthlyWorkDto item : monthlyWorkList){
+							for(MonthlyWorkInfo item : monthlyWorkList){
 								//System.out.println(item.getWorkingDate().getDayOfMonth());
 								
 								if(i == item.getWorkingDate().getDayOfMonth()){
-									DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+									DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 		    						
 									if(item.getStartWorkTime()!=null){
 										String startTimeFormat = item.getStartWorkTime().format(timeFormatter);
