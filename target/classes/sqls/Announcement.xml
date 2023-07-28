@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="Announcement">
+
+	<!-- 추가하기 -->
+	<insert id="announcementInsert" parameterType="ssg.com.maeil.dto.AnnouncementDto">
+ 		 insert into maeil_announcement(employee_id, title, content, writing_period, auth, type, del,employee_name)
+ 		 values (#{employee_id}, #{title}, #{content}, now(), #{auth}, #{type}, 0,#{employee_name});
+	</insert>	
+	
+	<!-- 리스트보기 -->
+	<select id="announcementList" parameterType="ssg.com.maeil.dto.AnnouncementSearch"
+		resultType="ssg.com.maeil.dto.AnnouncementDto">
+	select seq,employee_id,title,content,writing_period,auth,type,del,employee_name
+	from maeil_announcement
+	where del = 0
+	<if test="choice != null and choice != '' and search != null and search != '' ">
+		<if test="choice == 'title'">
+			and title like concat('%', #{search}, '%')
+		</if>
+		<if test="choice == 'content'">
+			and content like concat('%', #{search}, '%')
+		</if>
+		<if test="choice == 'type'">
+			and type like concat('%', #{search}, '%')
+		</if>		
+	</if>
+	order by seq desc
+	limit ${(pageNumber * 10)}, 10	
+</select>
+
+<select id="getallannouncement" parameterType="ssg.com.maeil.dto.AnnouncementSearch"
+		resultType="Integer">
+	select count(*) 
+	from maeil_announcement where del = 0
+	<if test="choice != null and choice != '' and search != null and search != '' ">
+		<if test="choice == 'title'">
+			and title like concat('%', #{search}, '%') 
+		</if>
+		<if test="choice == 'content'">
+			and content like concat('%', #{search}, '%') 
+		</if>
+		<if test="choice == 'type'">
+			and type like concat('%', #{search}, '%')
+		</if>	
+	</if>
+</select>
+<!-- 상세보기 -->
+<select id="announcementdetail" parameterType="Integer" resultType="ssg.com.maeil.dto.AnnouncementDto">
+		select seq,employee_id,title,content,writing_period,type,del,employee_name
+		from maeil_announcement
+		where seq=#{seq}
+</select>
+<!-- 수정하기 -->
+<update id="announcementupdate" parameterType="ssg.com.maeil.dto.AnnouncementDto">
+  update maeil_announcement
+  set title=#{title}, content=#{content}, type=#{type}
+  where seq=#{seq}
+</update>
+
+<update id="announcementdelete" parameterType="Integer">
+	update maeil_announcement
+	set del=1
+	where seq=#{seq}
+</update>
+
+</mapper>

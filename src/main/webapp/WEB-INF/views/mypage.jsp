@@ -18,7 +18,9 @@
 	
 	}
 	String lowerFileName = dto.getNewfilename().toLowerCase();
+	if(lowerFileName != null){
 	System.out.println("lowerFileName 값 확인 : " + lowerFileName);
+	}
 %>
 
 <!DOCTYPE html>
@@ -48,7 +50,7 @@
 <hr/><br/>
 
 <div align="center">
-<img src="http://localhost:9200/springSamples/upload/7777.png" alt="프로필 이미지" class="imgfile">
+<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
 </div>
 
 <form action="upload.do" method="post" enctype="multipart/form-data">
