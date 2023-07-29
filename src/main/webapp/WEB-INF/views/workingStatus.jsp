@@ -21,35 +21,29 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 <title>working status1</title>
 
 <style>
 	.table{
-		width: 70%;
-		margin: 50px auto;
+		width: 100%;
+		height: 500px;
+		margin: 10px auto;
 		text-align: center;
 	}
-	h1{
-		margin: 30px;
-	}
-	.absent, .vacation, .work, .leave{
+	.table tbody{
+		height: 50px;
 	}
 </style>
 </head>
 <body>
 
-<div class="container">
+<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
-	  <div id="mainContent" class="content">
-	  
-	<h1 align="center">working status</h1>
-	<%-- <p align="center">login user : <%=dto.getEmployee_name() %>님</p> --%>
-	
-	
-	
+	<div id="mainContent" class="contentWrap">
+		<h2>일별 근무 현황</h2>
 	<table class="table">
   		<thead class="thead-dark">
 			<tr>

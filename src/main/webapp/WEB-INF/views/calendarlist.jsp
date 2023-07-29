@@ -34,7 +34,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 
 <style type="text/css">
 th{
@@ -55,22 +55,15 @@ th{
 
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
-	  <div id="mainContent" class="content">
+	  <div id="mainContent" class="contentWrap">
  
 <h1>Department Calendar</h1>
-<br/>
-<br/>
-<a href = "main.do">메인화면</a>
-<br/>
-<br/>
-
-<%=login.getEmployee_id() %>님
-<br>
-<br>
+<!-- <a href = "main.do">메인화면</a> -->
+<%-- <%=login.getEmployee_id() %>님 --%>
 
 <%
 	Calendar cal = Calendar.getInstance();
