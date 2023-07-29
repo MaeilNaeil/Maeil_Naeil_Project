@@ -49,6 +49,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+<<<<<<< HEAD
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">  --%>
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+=======
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 
 <style>
@@ -59,11 +63,16 @@
 
 </style>
 
+>>>>>>> 9e566dd019a7e563e0a6a49a9d1690f530bc6ab0
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	
+	
+	<!-- TODO : 로고 조절 / nav margin / 달력<->공지 / 태깅꾸미기 -->
 	
   
   <div align="center" class="item content-1">
@@ -147,52 +156,56 @@
 		const leaveWorkBtnWrap = document.querySelector(".leaveWorkBtnWrap");
 		
 		const startWork = () => {
-		$(document).ready(function(){			
-			$.ajax({
-				url:"startWork.do",
-				type:"post",
-				data:{ employeeId:2 },
-				<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
-				success:function(result){
-	/* 			alert(JSON.stringify(result)); */
-				
-				if(result.alreadyHasTime){
-					alert('이미 출근되었습니다.');	
-				}
-				startWorkBtn.style.display = 'none';
-				document.location.reload();
-				},
-				
-				error:function(){
-					alert('error');
-				}		
-			});	
-		 })
+			if(confirm("출근 등록하시겠습니까?")){
+				$(document).ready(function(){			
+					$.ajax({
+						url:"startWork.do",
+						type:"post",
+						data:{ employeeId:2 },
+						<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
+						success:function(result){
+						/*alert(JSON.stringify(result)); */
+						
+						if(result.alreadyHasTime){
+							alert('이미 출근되었습니다.');	
+						}
+						startWorkBtn.style.display = 'none';
+						document.location.reload();
+						},
+						
+						error:function(){
+							alert('error');
+						}		
+					});	
+				 })
+			}
 	  	}
 		
 		
 		const leaveWork = () => {
-			$(document).ready(function(){
-				$.ajax({
-					url:"leaveWork.do",
-					type:"post",
-					data:{ employeeId:2 },
-					<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
-					success:function(result){
-					/* alert(JSON.stringify(result)); */
-					if(result.alreadyHasTime){
-						alert('이미 퇴근되었습니다.');	
-					}
-					leaveWorkBtn.style.display = 'none';
-					document.location.reload();
-					},
-					
-					error:function(){
-						alert('error');
-					}		
-				});	
-			 })
-		  	}
+			if(confirm("퇴근 등록하시겠습니까?")){
+				$(document).ready(function(){
+					$.ajax({
+						url:"leaveWork.do",
+						type:"post",
+						data:{ employeeId:2 },
+						<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
+						success:function(result){
+						/* alert(JSON.stringify(result)); */
+						if(result.alreadyHasTime){
+							alert('이미 퇴근되었습니다.');	
+						}
+						leaveWorkBtn.style.display = 'none';
+						document.location.reload();
+						},
+						
+						error:function(){
+							alert('error');
+						}		
+					});	
+				 })
+			} 
+		}
 </script>
 
 

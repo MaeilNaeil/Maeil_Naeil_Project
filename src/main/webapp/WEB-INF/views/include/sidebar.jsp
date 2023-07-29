@@ -10,6 +10,15 @@
 	</form>
 </div>
 <div class="item sidebar-2" align="center">
+<<<<<<< HEAD
+	<ul class="nav_list_wrap">
+		<li class="nav_list"><a href="mypage.do" class="nav_item">마이페이지</a></li>
+		<li class="nav_list"><a href="calendarlist.do">부서일정관리</a></li>
+		<li class="nav_list"><a href="workingStatus.do">일별 근무 현황</a></li>
+		<li class="nav_list"><a href="monthlyMyWork.do">월별 나의 근무</a></li>
+		<li class="nav_list"><a href="announcementmain.do">공지사항</a></li>
+		
+=======
 	<form action="mypage.do">
 		<button type="submit">마이페이지</button>
 	</form>
@@ -25,13 +34,19 @@
 	<form action="announcementmain.do" id="frm">
 		<button type="submit">공지사항</button>
 	</form><br>
+>>>>>>> 9e566dd019a7e563e0a6a49a9d1690f530bc6ab0
 	<%
-		if(dto.getAuth()==3){
+	if(dto.getAuth()==3){
 	%>
-	<a href="newemployee.do">사원 추가</a>
+		<li class="nav_list"><a href="newemployee.do">사원 추가</a></li>
 	<%
-		}
+	}
 	%>
+<<<<<<< HEAD
+	</ul>
+	
+
+=======
 	<script type="text/javascript">
 function printTime() {
 	var clock = document.getElementById("clock");
@@ -52,4 +67,5 @@ function printTime() {
 	};
 </script>
 	
+>>>>>>> 9e566dd019a7e563e0a6a49a9d1690f530bc6ab0
 </div>
