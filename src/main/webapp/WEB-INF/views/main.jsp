@@ -49,10 +49,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
-<<<<<<< HEAD
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">  --%>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
-=======
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 
 <style>
@@ -62,8 +60,6 @@
 }
 
 </style>
-
->>>>>>> 9e566dd019a7e563e0a6a49a9d1690f530bc6ab0
 </head>
 <body>
 <div class="wrap">
