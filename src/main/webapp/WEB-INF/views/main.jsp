@@ -6,34 +6,32 @@
 <%@page import="javax.print.attribute.standard.DateTimeAtCompleted"%>
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
-	MemberDto dto = (MemberDto)session.getAttribute("login");
-	String lowerFileName;
-	
-	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
-		%>
-		<script>
+MemberDto dto = (MemberDto) session.getAttribute("login");
+String lowerFileName;
+
+if (dto == null || (dto.getEmployee_id() + "") == "" || (dto.getEmployee_id() + "") == null) {
+%>
+<script>
 		alert("로그인해주세요");
 		location.href="login.do";
 		</script>
-		<%
-	}
-	
-		if(dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
-			lowerFileName = dto.getNewfilename().toLowerCase();
-		} else {
-			lowerFileName = "base.PNG"; 
-		}
+<%
+}
 
-	
-	MainResponse mainResponse = (MainResponse)request.getAttribute("mainResponse");
-	System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
-	System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
-	
-	boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
-	boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
+if (dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
+lowerFileName = dto.getNewfilename().toLowerCase();
+} else {
+lowerFileName = "base.PNG";
+}
 
+MainResponse mainResponse = (MainResponse) request.getAttribute("mainResponse");
+System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
+System.out.println("mainResponse.getLeaveWorkTime >>> " + mainResponse.getLeaveWorkTime());
+
+boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
+boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 %>
 
 
@@ -43,83 +41,96 @@
 <meta charset="UTF-8">
 <title>Is Best를 방문해주셔서 감사합니다.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">  --%>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/test.css">
+
 
 <style>
 .imgfile {
-	width:75px;
-	height:100px;
+	width: 75px;
+	height: 100px;
 }
-
 </style>
 </head>
 <body>
-<div class="wrap">
-	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	
-	
-	
-	<!-- TODO : 로고 조절 / nav margin / 달력<->공지 / 태깅꾸미기 -->
-	
-  
-  <div align="center" class="item content-1">
-  	<%-- <p>어서오세요 <%=dto.getEmployee_name() %> 님</p> --%>
-		<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
-		<br>
-			<%
+	<div class="wrap">
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+
+
+
+		<!-- TODO : 로고 조절 / nav margin / 달력<->공지 / 태깅꾸미기 -->
+
+
+		<div class="contentWrap">
+			<div align="center" class="item content-1">
+				<%-- <p>어서오세요 <%=dto.getEmployee_name() %> 님</p> --%>
+<%-- 				<img
+					src="http://localhost:9300/springSamples/upload/<%=lowerFileName%>"
+					alt="프로필 이미지" class="imgfile"> <br> --%>
+				<%
 				LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
 				String startWorkTime = hasStartWorkTime ? responseStartTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
 				LocalDateTime responseLeaveTime = mainResponse.getLeaveWorkTime();
 				String leaveWorkTime = hasLeaveWorkTime ? responseLeaveTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
-				
-				if(hasStartWorkTime && hasLeaveWorkTime){
-			%>		
-				<div class="startWorkBtnWrap">	
-					<%=startWorkTime %>
-				</div>			
-				<div class="leaveWorkBtnWrap">
-					<%=leaveWorkTime %>
+	
+				if (hasStartWorkTime && hasLeaveWorkTime) {
+				%>
+				<div class="startWorkBtnWrap">
+					<%=startWorkTime%>
 				</div>
-			<%		
-				}else if(!hasStartWorkTime && !hasLeaveWorkTime){
-			%>
-				<div class="startWorkBtnWrap">	
-					<button class="startWorkBtn" onclick="startWork()"> 출근</button>
-				</div>	
 				<div class="leaveWorkBtnWrap">
-					<button class="leaveWorkBtn" onclick="leaveWork()" disabled="disabled">퇴근</button>
+					<%=leaveWorkTime%>
 				</div>
-			<%		
-				}else if(hasStartWorkTime && !hasLeaveWorkTime){
-			%>
-				<div class="startWorkBtnWrap">	
-					<%=startWorkTime %>
+				<%
+				} else if (!hasStartWorkTime && !hasLeaveWorkTime) {
+				%>
+				<div class="startWorkBtnWrap">
+					<button class="startWorkBtn" onclick="startWork()">출근</button>
+				</div>
+				<div class="leaveWorkBtnWrap">
+					<button class="leaveWorkBtn" onclick="leaveWork()"
+						disabled="disabled">퇴근</button>
+				</div>
+				<%
+				} else if (hasStartWorkTime && !hasLeaveWorkTime) {
+				%>
+				<div class="startWorkBtnWrap">
+					<%=startWorkTime%>
 				</div>
 				<div class="leaveWorkBtnWrap">
 					<button class="leaveWorkBtn" onclick="leaveWork()">퇴근</button>
 				</div>
-			<%
+				<%
 				}
-			%>
-  	
-  
-  	
-  </div>
-  <div class="item content-2"><a href="announcementmain.do">공지사항</a></div>
-  <div class="item content-3"><p>달력</p></div>
-  
-  <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
- 
-</div>
+				%>
+	
+	
+	
+			</div>
+			<div class="item content-2">
+				<a href="announcementmain.do">공지사항</a>
+			</div>
+			<div class="item content-3">
+				<p>달력</p>
+			</div>
+		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+	</div>
 </body>
 <script type="text/javascript">
 
