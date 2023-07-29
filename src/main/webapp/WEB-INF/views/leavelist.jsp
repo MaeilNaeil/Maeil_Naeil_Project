@@ -70,11 +70,11 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
 
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	
-	  <div id="mainContent" class="content">
+
+	  <div id="mainContent" class="contentWrap">
 
 <h1>Leave List</h1>
 <br/>
