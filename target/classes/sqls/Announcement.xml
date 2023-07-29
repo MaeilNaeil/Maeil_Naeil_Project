@@ -67,6 +67,6 @@
 </update>
 
 <select id="recentThreeAnnounce" resultType="ssg.com.maeil.dto.AnnouncementDto">
-	SELECT * FROM maeil_announcement order by writing_period desc limit 3
+	SELECT * FROM maeil_announcement order by writing_period desc limit 4	
 </select>
 </mapper>
