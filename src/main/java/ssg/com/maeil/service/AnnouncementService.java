@@ -16,6 +16,6 @@ public interface AnnouncementService {
 	
 	boolean announcementupdate(AnnouncementDto dto);
 	
-	boolean announcementdelete(int seq);
+	boolean announcementdelete(AnnouncementDto dto);
 	List<AnnouncementDto> recentThreeAnnounce();
 }

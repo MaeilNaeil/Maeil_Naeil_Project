@@ -34,6 +34,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 
 <style type="text/css">
 th{
@@ -54,11 +55,16 @@ th{
 
 </head>
 <body>
-
+<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="content">
+ 
 <h1>Department Calendar</h1>
 <br/>
 <br/>
-<a href = "leavelist.do">휴가관리</a>
+<a href = "main.do">메인화면</a>
 <br/>
 <br/>
 
@@ -194,8 +200,10 @@ th{
 						</tr>
 	
 	</table>	
+	 	</div>
 </div>
-	
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
 	

@@ -76,7 +76,7 @@ if(login != null && login.equals("") == false){
 		}else{
 			%>
 			<script>
-			alert("로그인되었습니다");
+		/* 	alert("로그인되었습니다"); */
 			location.href = "main.do";
 			</script>
 			<%

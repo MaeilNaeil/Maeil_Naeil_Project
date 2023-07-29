@@ -21,6 +21,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <title>working status1</title>
 
 <style>
@@ -37,6 +38,13 @@
 </style>
 </head>
 <body>
+
+<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="content">
+	  
 	<h1 align="center">working status</h1>
 	<%-- <p align="center">login user : <%=dto.getEmployee_name() %>님</p> --%>
 	
@@ -144,6 +152,8 @@
 			%>
 		</tbody>
 	</table>
-
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>

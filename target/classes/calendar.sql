@@ -8,6 +8,8 @@ create table maeil_department_calendar(
     wdate timestamp  not null    
 );
 
+
+
 select*
 from maeil_department_calendar;
 

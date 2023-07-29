@@ -42,8 +42,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	}
 
 	@Override
-	public boolean announcementdelete(int seq) {
-		return dao.announcementdelete(seq)>0?true:false;
+	public boolean announcementdelete(AnnouncementDto dto) {
+		return dao.announcementdelete(dto)>0?true:false;
 	}
 
 	@Override

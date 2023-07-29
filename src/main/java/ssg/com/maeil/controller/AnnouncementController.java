@@ -3,11 +3,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ssg.com.maeil.dto.AnnouncementDto;
 import ssg.com.maeil.dto.AnnouncementSearch;
@@ -68,17 +71,18 @@ public class AnnouncementController {
 		model.addAttribute("ann", ann);
 		return "announcementdetail";
 	}
-	@PostMapping("announcementupdate.do")
-	public String announcementupdate(int seq, Model model) {
+	@RequestMapping(value="announcementupdate.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String announcementupdate(AnnouncementDto dto, Model model) {
 		System.out.println("AnnouncementController announcementupdate() " + new Date());
 		
-		AnnouncementDto ann = service.announcementdetail(seq);
+		AnnouncementDto ann = service.announcementdetail(dto.getSeq());
 		model.addAttribute("ann", ann);
+		
 		return "announcementupdate";
 	}
 	
-	@PostMapping("announcementupdateAf.do")
-	public String announcementupdate(AnnouncementDto dto,Model model) {
+	@RequestMapping(value="announcementupdateAf.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String announcementupdateAf(AnnouncementDto dto, Model model) {
 		System.out.println("AnnouncementController announcementupdateAf() " + new Date());
 		String updatemessage = "Yes";
 		boolean isS = service.announcementupdate(dto);
@@ -91,11 +95,14 @@ public class AnnouncementController {
 		return "message";
 	}
 	
-	@PostMapping("announcementdelete.do")
-	public String announcementdelete(int seq,Model model) {
+	@RequestMapping(value="announcementdelete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String announcementdelete(AnnouncementDto dto,Model model) {
 		System.out.println("AnnouncementController announcementdelete() " + new Date());
 		String deletemessage = "Y";
-		boolean isS = service.announcementdelete(seq);
+		
+		System.out.println("컨트롤러에서 dto값 확인 : " + dto.toString());
+		
+		boolean isS = service.announcementdelete(dto);
 		if(isS==false) {
 			deletemessage="N";
 		}

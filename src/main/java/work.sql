@@ -16,6 +16,8 @@ foreign key (employee_id) references maeil_member(employee_id)
 
 );
 
+
+
 select * from maeil_member
 
 select * from maeil_working_status

@@ -40,7 +40,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <style type="text/css">
 
 .trlist:hover {
@@ -70,11 +70,16 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
 
 </head>
 <body>
+<div class="container">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="content">
 
 <h1>Leave List</h1>
 <br/>
 <br/>
-<a href = "calendarlist.do">부서일정</a>
+<a href = "main.do">메인화면</a>
 <br/>
 <br/>
 
@@ -127,6 +132,10 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
 		</table>		
 	</form>				
 </div>
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
+
 
 
 
