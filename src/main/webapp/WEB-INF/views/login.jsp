@@ -23,6 +23,7 @@ input {
 	margin-top: 5px;
 }
 	.image-box {
+.image-box {
 	    width:2100px;
 	    height:600px;
 	    overflow:hidden;
@@ -30,10 +31,17 @@ input {
 	}
 	
 	.image-thumbnail {
+}
+.image-thumbnail {
 	    width:100%;
 	    height:100%;
 	    object-fit:cover;
 	}
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
 </style>
 
 
@@ -51,21 +59,28 @@ input {
 	<table>
 		<tr>
 			<th>사원번호&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>사원번호&emsp;</th>
 			<td>
 				<input type="text" id="employee_id" style="padding-left: 10px;" name="employee_id" placeholder="아이디를 입력하세요">
+				<input type="text" id="employee_id" style="padding-left: 10px;" name="employee_id" class="form-control" placeholder="아이디를 입력하세요">
 			</td>
 		</tr>
 		<tr>	
 			<th>패스워드&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<th>패스워드&emsp;</th>
 			<td>
 				<input type="password" id="employee_password" style="padding-left: 10px;" name="employee_password">
+				<input type="password" id="employee_password" style="padding-left: 10px;" name="employee_password" class="form-control">
 			</td>
 		</tr>
+		<tr class="space"></tr>
 		<tr>
 			<td colspan="2">
 			<input type="button" onclick="find()" value="사원번호 / 비밀번호 찾기">
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" onclick="login()" value="로그인">
+			<input type="button" class="btn btn-outline-dark" onclick="find()" value="사원번호 / 비밀번호 찾기">
+			&emsp;<input type="button" class="btn btn-outline-dark" onclick="login()" value="로그인">
 				
 				
 			</td>
@@ -93,6 +108,7 @@ function login() {
 
 function find() {
 	window.open('find.do','ID / 비밀번호찾기','width=430,height=500,location=no,status=no,scrollbars=yes');
+	window.open('find.do','ID / 비밀번호찾기','width=450,height=570,location=no,status=no,scrollbars=yes');
 }
 
 

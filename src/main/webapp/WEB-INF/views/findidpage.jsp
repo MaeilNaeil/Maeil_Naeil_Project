@@ -13,29 +13,60 @@
 	margin-bottom: 50px;
 	
 }
+.content {
+	margin-left: 40px;
+}
+#employee_email{
+	width: 300px;
+}
+#getid {
+	width: 300px;
+}
 
 </style>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
 
 <div align="center" class="title">
 <h1>사원번호 찾기</h1>
+<h3>사원번호 찾기</h3>
 </div>
 <hr/>
 
+<div class="content">
 <p>마이페이지에 등록하신 이메일을 입력하세요.</p>
 이메일 : &nbsp;&nbsp;&nbsp;<input type="text" name="employee_email" id="employee_email" />
 &nbsp;&nbsp;<input type="button" onclick="findid()" value="사원번호찾기" id="inputbtn" />
 <br/><hr/>
+<p>이메일</p>
+<input type="text" name="employee_email" id="employee_email" class="form-control" />
+<br/>
+<input type="button" onclick="findid()" value="사원번호 찾기" id="inputbtn" class="btn btn-outline-dark" />
+</div>
+<hr/>
+
+<div class="content">
+<p>사원번호</p>
+<input type="text" id="getid" class="form-control" readonly="readonly"/>
+</div>
 
 사원번호 : <input type="text" id="getid" readonly="readonly"/>
 <hr/>
+<div>
 <p align="center">
 <input type="button" onclick="back()" value="뒤로" />
 <input type="button" onclick="exit()" value="닫기" />
+<input type="button" class="btn btn-outline-dark" onclick="back()" value="뒤로" />
+<input type="button" class="btn btn-outline-dark" onclick="exit()" value="닫기" />
 </p>
+</div>
 
 <script type="text/javascript">
 function findid() {

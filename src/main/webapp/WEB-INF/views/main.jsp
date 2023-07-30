@@ -17,6 +17,10 @@ if (dto == null || (dto.getEmployee_id() + "") == "" || (dto.getEmployee_id() + 
 		alert("로그인해주세요");
 		location.href="login.do";
 		</script>
+	<script>
+	alert("다시 로그인해주세요.");
+	location.href="login.do";
+	</script>
 <%
 }
 
@@ -25,6 +29,10 @@ lowerFileName = dto.getNewfilename().toLowerCase();
 } else {
 lowerFileName = "base.PNG";
 }
+	lowerFileName = dto.getNewfilename().toLowerCase();
+	} else {
+		lowerFileName = "base.PNG";
+	}
 
 MainResponse mainResponse = (MainResponse) request.getAttribute("mainResponse");
 System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());

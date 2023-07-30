@@ -9,8 +9,18 @@
 	List<HashMap<String, Object>> statusList = (List)request.getAttribute("statusList");
 	
 	for(HashMap<String, Object> item : statusList ) {
-		System.out.println("jsp!!!!! >> "+item.get("employeeId"));
+		System.out.println("jsp!!!!! >> "+item.get("employeeId"));	
 	}
+	
+
+	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 %>
 <!DOCTYPE html>
 <html>

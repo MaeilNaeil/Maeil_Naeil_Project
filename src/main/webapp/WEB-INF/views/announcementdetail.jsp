@@ -7,6 +7,15 @@
 	MemberDto mem = (MemberDto)session.getAttribute("login");
 	
 	String currentURL = request.getRequestURL().toString();
+	
+	if(mem == null || (mem.getEmployee_id()+"") == "" ||(mem.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 %>
 <!DOCTYPE html>
 <html>
@@ -21,13 +30,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 </head>
 <body>
 	<div class="container">
+	<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
 	  <div id="mainContent" class="content">
+	  <div id="mainContent" class="contentWrap">
 	
 	<div align="center">
 		<h1>디테일</h1>
