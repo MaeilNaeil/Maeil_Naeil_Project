@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
+<style>
+	.nav_list{
+		font-size: 16px;
+	}
+</style>
 <% MemberDto dto = (MemberDto)session.getAttribute("login"); %>
 <div class="item sidebar-1">
 	<p id="clock"></p>

@@ -1,27 +1,27 @@
+<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.Date"%>
 <%@page import="ssg.com.maeil.controller.MainResponse"%>
 <%@page import="javax.print.attribute.standard.DateTimeAtCompleted"%>
-<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-MemberDto dto = (MemberDto) session.getAttribute("login");
+MemberDto loginMember = (MemberDto) session.getAttribute("login");
 String lowerFileName;
 
-if (dto == null || (dto.getEmployee_id() + "") == "" || (dto.getEmployee_id() + "") == null) {
+if (loginMember == null || (loginMember.getEmployee_id() + "") == "" || (loginMember.getEmployee_id() + "") == null) {
 %>
-<script>
+	<script>
 		alert("로그인해주세요");
 		location.href="login.do";
-		</script>
+	</script>
 <%
 }
 
-if (dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
-lowerFileName = dto.getNewfilename().toLowerCase();
+if (loginMember.getNewfilename() != null && !loginMember.getNewfilename().isEmpty()) {
+lowerFileName = loginMember.getNewfilename().toLowerCase();
 } else {
 lowerFileName = "base.PNG";
 }
@@ -53,15 +53,41 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">  --%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainGrid.css">
 
 
 <style>
-.imgfile {
-	width: 75px;
-	height: 100px;
+.imgFile {
+	margin: 25px 10px 25px 25px;
+	width: 200px;
+	height: 250px;
+}
+.profile{
+	margin: 25px auto;
+	padding: 25px 0;
+	font-size: 16px;
+}
+.startWorkBtnWrap, .leaveWorkBtnWrap{
+	margin: 20px 0 0 0;
+	height: 40px;
+	line-height: 40px; 	
+}
+.startWorkBtn, .leaveWorkBtn{
+	padding: 4px 20px;
+	display: flex;
+	align-items:center;
+	border: none;
+	border-radius: 5px;
+	background-color:  dodgerblue;
+	color: white;
+}
+.leaveWorkBtnDisabled{
+	padding: 4px 20px;
+	display: flex;
+	align-items:center;
+	border: none;
+	border-radius: 5px;
 }
 </style>
 </head>
@@ -70,56 +96,62 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 
-
-
-		<!-- TODO : 로고 조절 / nav margin / 달력<->공지 / 태깅꾸미기 -->
-
-
-		<div class="contentWrap">
+		<div class="contentWrap mainContentWrap">
 			<div align="center" class="item content-1">
-				<%-- <p>어서오세요 <%=dto.getEmployee_name() %> 님</p> --%>
-<%-- 				<img
-					src="http://localhost:9300/springSamples/upload/<%=lowerFileName%>"
-					alt="프로필 이미지" class="imgfile"> <br> --%>
-				<%
-				LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
-				String startWorkTime = hasStartWorkTime ? responseStartTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
-				LocalDateTime responseLeaveTime = mainResponse.getLeaveWorkTime();
-				String leaveWorkTime = hasLeaveWorkTime ? responseLeaveTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
-	
-				if (hasStartWorkTime && hasLeaveWorkTime) {
-				%>
-				<div class="startWorkBtnWrap">
-					<%=startWorkTime%>
+				<img 
+					<%-- src="http://localhost:9100/springSamples/upload/<%=lowerFileName%>" --%>
+					src="http://localhost:9100/Maeil_Naeil/upload/profile.png"
+					alt="프로필 이미지" class="imgFile"> 
+				<div  class="profile">
+					<div>
+					어서오세요<br> 
+					<%=loginMember.getEmployee_name() %> 님
+					</div> 
+	 				
+
+					<%
+					LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
+					String startWorkTime = hasStartWorkTime ? responseStartTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
+					LocalDateTime responseLeaveTime = mainResponse.getLeaveWorkTime();
+					String leaveWorkTime = hasLeaveWorkTime ? responseLeaveTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
+		
+					if (hasStartWorkTime && hasLeaveWorkTime) {
+					%>
+					<div class="startWorkBtnWrap" style="display: flex;">
+						<p>출근 : &nbsp</p>
+						<p><%=startWorkTime%></p>
+					</div>
+					<div class="leaveWorkBtnWrap" style="display: flex;">
+						<p>퇴근 : &nbsp</p>
+						<p><%=leaveWorkTime%></p>
+					</div>
+					<%
+					} else if (!hasStartWorkTime && !hasLeaveWorkTime) {
+					%>
+					<div class="startWorkBtnWrap" style="display: flex;">
+						<p>출근 : &nbsp</p>
+						<button class="startWorkBtn" onclick="startWork()">출근</button>
+					</div>
+					<div class="leaveWorkBtnWrap" style="display: flex;">
+						<p>퇴근 : &nbsp</p>
+						<button class="leaveWorkBtnDisabled" onclick="leaveWork()"
+							disabled="disabled">퇴근</button>
+					</div>
+					<%
+					} else if (hasStartWorkTime && !hasLeaveWorkTime) {
+					%>
+					<div class="startWorkBtnWrap" style="display: flex;">
+						출근 : &nbsp
+						<%=startWorkTime%>
+					</div>
+					<div class="leaveWorkBtnWrap" style="display: flex;">
+						<p>퇴근 : &nbsp</p>
+						<button class="leaveWorkBtn" onclick="leaveWork()">퇴근</button>
+					</div>
+					<%
+					}
+					%>
 				</div>
-				<div class="leaveWorkBtnWrap">
-					<%=leaveWorkTime%>
-				</div>
-				<%
-				} else if (!hasStartWorkTime && !hasLeaveWorkTime) {
-				%>
-				<div class="startWorkBtnWrap">
-					<button class="startWorkBtn" onclick="startWork()">출근</button>
-				</div>
-				<div class="leaveWorkBtnWrap">
-					<button class="leaveWorkBtn" onclick="leaveWork()"
-						disabled="disabled">퇴근</button>
-				</div>
-				<%
-				} else if (hasStartWorkTime && !hasLeaveWorkTime) {
-				%>
-				<div class="startWorkBtnWrap">
-					<%=startWorkTime%>
-				</div>
-				<div class="leaveWorkBtnWrap">
-					<button class="leaveWorkBtn" onclick="leaveWork()">퇴근</button>
-				</div>
-				<%
-				}
-				%>
-	
-	
-	
 			</div>
 			<div class="item content-2">
 				<a href="announcementmain.do">공지사항</a>
@@ -134,29 +166,6 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 </body>
 <script type="text/javascript">
 
-	
-/* 			const startWork = (employee_id) => {
-			const date = new Date();
-			const hours = date.getHours();
-			const minutes = date.getMinutes();
-			const seconds = date.getSeconds();
-			const time = hours+":"+minutes+":"+seconds;
-			
-			alert("start btn click => " + time);
-
-			location.href = "startWork.do";
-		}  
-
-
-        var result = confirm("실행하시겠어요 ?");
-        if(result){
-            document.write("<h1> 실행합니다. </h1>")
-        }else{
-            document.write("<h1> 실행하지 않습니다. </h1>")
-        } 
-*/
-
-	
 		const startWorkBtn = document.querySelector(".startWorkBtn");
 		const startWorkBtnWrap = document.querySelector(".startWorkBtnWrap");
 		const leaveWorkBtn = document.querySelector(".leaveWorkBtn");
@@ -168,8 +177,7 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 					$.ajax({
 						url:"startWork.do",
 						type:"post",
-						data:{ employeeId:2 },
-						<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
+						data:{ employeeId:<%=loginMember.getEmployee_id() %> },
 						success:function(result){
 						/*alert(JSON.stringify(result)); */
 						
@@ -195,8 +203,7 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 					$.ajax({
 						url:"leaveWork.do",
 						type:"post",
-						data:{ employeeId:2 },
-						<%-- data:{ employeeId:<%=dto.getEmployee_id() %> }, --%>
+						data:{ employeeId:<%=loginMember.getEmployee_id() %> },
 						success:function(result){
 						/* alert(JSON.stringify(result)); */
 						if(result.alreadyHasTime){
