@@ -119,8 +119,8 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainGrid.css">
 
-
 <style>
+
 .imgfile {
 	margin: 25px 10px 25px 25px;
 	width: 200px;
