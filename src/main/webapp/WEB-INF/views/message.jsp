@@ -109,7 +109,7 @@ String calwrite = (String)request.getAttribute("calwrite");
 		if(calwrite.equals("CAL_WRITE_OK")){
 			%>
 			<script type="text/javascript">
-			alert("성공적으로 추가되었습니다");
+			/* alert("성공적으로 추가되었습니다"); */
 			location.href = "calendarlist.do";
 			</script>
 			<%
@@ -129,7 +129,7 @@ String calwrite = (String)request.getAttribute("calwrite");
 		if(calupdate.equals("CAL_UPDATE_OK")){
 			%>
 			<script type="text/javascript">
-			alert("성공적으로 수정되었습니다");
+			/* alert("성공적으로 수정되었습니다"); */
 			location.href = "calendarlist.do";
 			</script>
 			<%
@@ -149,7 +149,7 @@ String calwrite = (String)request.getAttribute("calwrite");
 		if(caldelete.equals("CAL_DELETE_OK")){
 			%>
 			<script type="text/javascript">
-			alert("성공적으로 삭제되었습니다");
+			/* alert("성공적으로 삭제되었습니다"); */
 			location.href = "calendarlist.do";
 			</script>
 			<%
