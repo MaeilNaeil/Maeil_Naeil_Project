@@ -38,21 +38,26 @@ input {
 table {
   border-collapse: separate;
   border-spacing: 0 10px;
+  margin-left: 500px;
+  margin-top: 550px;
+}
+
+th {
+	color: white;
+}
+.inputTable {
+	
 }
 </style>
 
 
 </head>
 
-<body>
+<body style="background-image:url('https://images.unsplash.com/photo-1523565543073-bf9608b265ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
 
 <form action="loginAf.do" method="post">
-<div align="center" class="image-box">
-	<img class="image-thumbnail"src="https://images.unsplash.com/photo-1523565543073-bf9608b265ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt ="이미지">
-</div>
-<hr/>
 
-<div align="center">
+<div class="inputTable">
 	<table>
 		<tr>
 			<th>사원번호&emsp;</th>
