@@ -9,7 +9,7 @@
 	from maeil_member m 
 	join (select seq, employee_id, title, content, rdate, wdate, share
 		  from (select row_number()over(partition by substr(rdate, 1, 8)
-		  		order by rdate asc) as rnum, seq, employee_id, title, content, rdate, wdate, share		  
+		  		order by rdate desc) as rnum, seq, employee_id, title, content, rdate, wdate, share		  
 				from maeil_department_calendar
 				where substr(rdate, 1, 6)=#{yyyyMM}) a
 		  where rnum between 1 and 3		
@@ -17,21 +17,6 @@
 	 <if test="auth == 1">	
 		where (m.department_id= #{department_id} and share != 2) or m.employee_id = #{employee_id}
 	</if>			
-</select>
-
-
-
-<insert id="calwrite" parameterType="ssg.com.maeil.dto.CalendarDto">
-	insert into maeil_department_calendar(seq, employee_id, title, content, rdate, wdate, share)
-	values(#{seq}, #{employee_id}, #{title}, #{content}, #{rdate}, now(), #{share})
-</insert>
-
-
-
-<select id="caldetail" parameterType="java.lang.Integer" resultType="ssg.com.maeil.dto.CalendarDto">
-	select seq, employee_id, title, content, rdate, wdate, share
-	from maeil_department_calendar
-	where seq=#{seq}
 </select>
 
 
@@ -44,9 +29,41 @@
 		  where substr(rdate, 1, 8)=#{yyyyMMdd}) c	 
 	 on m.employee_id = c.employee_id
 	<if test="auth == 1">
-		where (m.department_id= #{department_id} and share != 2)	
+		where (m.department_id= #{department_id} and share != 2) or c.employee_id=#{employee_id}
 	</if>	
 </select>
+
+
+
+<select id="caldetail" parameterType="java.lang.Integer" resultType="ssg.com.maeil.dto.CalendarDto">
+	select seq, employee_id, title, content, rdate, wdate, share
+	from maeil_department_calendar
+	where seq=#{seq}
+</select>
+
+
+
+<select id="maincalendarlist" parameterType="ssg.com.maeil.dto.CalendarParam" resultType="ssg.com.maeil.dto.CalendarDto">
+	select m.department_id, c.seq, c.employee_id, c.title, c.content, c.rdate, c.wdate, c.share, m.auth
+	from maeil_member m 
+	join (select seq, employee_id, title, content, rdate, wdate, share
+		  from (select row_number()over(partition by substr(rdate, 1, 8)
+		  		order by rdate desc) as rnum, seq, employee_id, title, content, rdate, wdate, share		  
+				from maeil_department_calendar
+				where substr(rdate, 1, 6)=#{yyyyMM}) a
+		  where rnum between 1 and 3		
+	 ) c on m.employee_id = c.employee_id
+	 <if test="auth == 1">	
+		where (m.department_id= #{department_id} and share != 2) or c.employee_id = #{employee_id}
+	</if>
+</select>
+
+
+
+<insert id="calwrite" parameterType="ssg.com.maeil.dto.CalendarDto">
+	insert into maeil_department_calendar(seq, employee_id, title, content, rdate, wdate, share)
+	values(#{seq}, #{employee_id}, #{title}, #{content}, #{rdate}, now(), #{share})
+</insert>
 
 
 
@@ -68,6 +85,7 @@
 		and employee_id=#{employee_id}
 	</if>
 </delete>
+
 
 
 </mapper>

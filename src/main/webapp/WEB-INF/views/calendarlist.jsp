@@ -34,38 +34,41 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
 <style type="text/css">
-th{
-  vertical-align : middle;
-}
 
-.sun{
-	color: red;
-}
-.sat{
-	color: blue;
-}
+th{vertical-align : middle;}
 
+p {
+	font-size: 12pt;
+	padding-left: 30px;
+	font-weight: bold;
+	}
 
+.sun{color: red;}
 
+.sat{color: blue;}
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
 
 </style>
 
 </head>
-<body>
+<body id="bodyscr">
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
-	  <div id="mainContent" class="contentWrap">
- 
-<h1>Department Calendar</h1>
-<!-- <a href = "main.do">메인화면</a> -->
-<%-- <%=login.getEmployee_id() %>님 --%>
-
+	  <div id="mainContent" class="contentWrap">	
+	  
 <%
 	Calendar cal = Calendar.getInstance();
 	cal.set(Calendar.DATE, 1);
@@ -101,48 +104,45 @@ th{
 	
 	// <<	year--
 	String pp = String.format("<a href='calendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
-								+ "<img src='./images/left.png' width='20px' height='20px' >"
+								+ "<img src='./images/left.png' width='20px' height='23px' >"
 								+ "</a>", year-1, month);
 	
 	// <	month--
 	String p = String.format("<a href='calendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
-								+ "<img src='./images/prec.png' width='20px' height='20px' >"
+								+ "<img src='./images/prec.png' width='20px' height='23px' >"
 								+ "</a>", year, month-1);
 	
 	// >	month++
 	String n = String.format("<a href='calendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
-								+ "<img src='./images/next.png' width='20px' height='20px' >"
+								+ "<img src='./images/next.png' width='20px' height='23px' >"
 								+ "</a>", year, month+1);
 	
 	// >>	year++
 	String nn = String.format("<a href='calendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
-								+ "<img src='./images/last.png' width='20px' height='20px' >"
+								+ "<img src='./images/last.png' width='20px' height='23px' >"
 								+ "</a>", year+1, month);	   	
 	
 	
 %>
 
 
-
-
-
 <div align="center">
-	<table border="1">
+<p>어서오세요 <%=login.getEmployee_id() %>님, <%=login.getDepartment_name() %>의 일정입니다.&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<p>
+	<table>
 	<col width="120"><col width="120"><col width="120"><col width="120">
-	<col width="120"><col width="120"><col width="120">
-	
-		<tr height="80">
+	<col width="120"><col width="120"><col width="120">	
+		<tr height="60">
 			<td colspan="7" align="center">
 				<%=pp %>&nbsp;<%=p %>&nbsp;&nbsp;&nbsp;&nbsp;
 			
-				<font style="color: #3c3c3c; font-size: 40px; font-family: fantasy">
+				<font style="color: #3c3c3c; font-size: 30px; font-family: sans-serif;">
 					<%=String.format("%d년&nbsp;&nbsp;%2d월", year, month) %>
 				</font>
 			
 				&nbsp;&nbsp;&nbsp;&nbsp;<%=n %>&nbsp;<%=nn %>
 			</td>
 		</tr>	
-		<tr height="30" align="center" style="background-color: rgb(52, 58, 64); color: white;">
+		<tr height="30" align="center" style="background-color: rgb(68, 67, 88); color: white;">
 			<th class="sun">SUN</th>
 			<th>MON</th>
 			<th>TUS</th>
@@ -156,18 +156,15 @@ th{
 		<%	
 		for(int i = 1; i < dayOfWeek; i++){
 		%>	
-			<td style="background-color: #eeeeee">&nbsp;</td>
+			<td style="background-color: rgba(216, 217, 218, 0.3)">&nbsp;</td>
 		<%
 		}
-		
-	
-	
-	
+			
 	
 			int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 			for(int i = 1; i <= lastday; i++) {
 			%>
-			<td style="color: #3c3c3c; padding-top: 5px">
+			<td style="background-color:rgb2550, 255, 255); padding-top: 5px">
 				<%=CalendarUtil.daylist(year, month, i) %>&nbsp;&nbsp;<%=CalendarUtil.calwrite(year, month, i) %>
 				<%=CalendarUtil.makeTable(year, month, i, list) %>			
 			</td>
@@ -177,27 +174,28 @@ th{
 					</tr><tr height="100" align="left" valign="top">
 			<%
 				}
-			}
-	
-	
-	
-	
+			}	
 	
 						cal.set(Calendar.DATE, lastday);
 						int weekday = cal.get(Calendar.DAY_OF_WEEK);
 						for(int i = 0; i < 7 - weekday; i++) {	
 						%>
-							<td style="background-color: #eeeeee">&nbsp;</td>
+							<td style="background-color: rgba(216, 217, 218, 0.3)">&nbsp;</td>
 						<%
 						}
 						%>
 						</tr>
 	
 	</table>	
-	 	</div>
 </div>
+
+	</div>
+
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
 </div>
+
+
 </body>
 </html>
 	

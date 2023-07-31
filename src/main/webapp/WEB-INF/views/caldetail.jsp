@@ -51,25 +51,72 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
+
 <style type="text/css">
 
-th {
-	text-align: center;
-}
+th, td {		
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		padding: 8px;		
+		}
+
+th {text-align: center;}
+
+.insty {
+		 outline: none;
+		 border: none;
+		 background-color:transparent;
+		 resize: none;
+		}
+
+.caldetail {
+			text-align: center;				
+			border-top: 1px solid rgb(216, 217, 218);
+			border-bottom: 1px solid rgb(216, 217, 218);
+			border-left: none;
+			border-right: none;				
+			}
+
+#detailcontent {
+				text-align:justify;			
+				padding-left: 20px;
+				padding-right: 20px;
+				height: 450px;
+				line-height: 20pt;
+				overflow: auto;
+				}
+				
+
+/* 스크롤바 */
+#detailcontent::-webkit-scrollbar {width: 10px;}
+#detailcontent::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#detailcontent::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
 
 </style>
 
 </head>
-<body>
+<body id="bodyscr">
+<div class="wrap">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="contentWrap">
 
-<h2>상세일정</h2>
-<br/><br/>
 
 <div align="center">
 	<form>
-		<table border="1" class="table">
-		<col width="200"><col width="500">
-			<thead class="thead-dark">
+		<table class="caldetail">
+		<col width="100"><col width="800">
+			<thead>
 				<tr>
 					<th>작성자</th>
 					<td>
@@ -85,25 +132,25 @@ th {
 				<tr>
 					<th>공유</th>
 					<td>
-						<%=msg %>									
+						<%=msg %>						
 					</td>
 				</tr>
 				<tr>
 					<th>제목</th>
 					<td>
-						<%=cal.getTitle() %>
+						<textarea rows="1" cols="95" class="insty" readonly="readonly"><%=cal.getTitle() %></textarea>
 					</td>
 				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<%=cal.getContent() %>
+				<tr>					
+					<td colspan="2">
+						<textarea rows="18" cols="95" class="insty" id="detailcontent" readonly="readonly"><%=cal.getContent() %></textarea>						
 					</td>
 				</tr>			
 			</thead>
 			<tbody></tbody>		
 		</table>
-			<button type="button" onclick="calendarlist()" class="btn btn-primary">일정목록</button>
+			<br/>
+			<button type="button" onclick="calendarlist()" class="btn btn-primary">일정목록</button>			
 		<%
 		if(calauth == 3 || calid == writer) {
 		%>
@@ -111,7 +158,8 @@ th {
 			<button type="button" onclick="deleteCal(<%=cal.getSeq() %>)" class="btn btn-primary">일정삭제</button>
 		<%	
 		}
-		%>					
+		%>	
+			
 	</form>
 </div>
 
@@ -130,7 +178,9 @@ function deleteCal(seq) {
 }
 
 </script>
-
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
 

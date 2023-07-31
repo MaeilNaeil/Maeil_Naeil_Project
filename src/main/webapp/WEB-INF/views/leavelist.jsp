@@ -14,7 +14,7 @@
 <%
 
 
-	MemberDto mem = (MemberDto)session.getAttribute("login");	
+	MemberDto login = (MemberDto)session.getAttribute("login");	
 	
 	List<LeaveDto> list = (List)request.getAttribute("leavelist");
 
@@ -40,64 +40,104 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
+
 <style type="text/css">
 
-.trlist:hover {
-				color: rgb(255, 255, 255);
-				font-weight: bold;
-				background-color: rgba(95, 85, 205, 0.5);		
-				}
-
+:root	{accent-color: rgb(255, 255, 255);}
 	
-option:checked{background-color:rgba(95, 85, 205, 0.2);}
+option:checked{background-color:rgb(216, 217, 218);}
 input[type="checkbox"]:checked{width: 17px; height: 17px;}
 
-
-:root	{
-			accent-color: rgb(255, 255, 255);
+th, td {		
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		padding: 8px;		
 		}
 
+th {text-align: center;}
 
-.table {
-			text-align: center;
-		}
+.trlist:hover {
+				color: rgb(78, 79, 235);
+				font-weight: bold;
+				background-color: rgba(216, 217, 218, 0.5);		
+				}
 
-#delb {
-		margin-right: 85px;
-	  }
+.leavetable {
+			text-align: center;						
+			border-top: 1px solid rgb(216, 217, 218);
+			border-bottom: 1px solid rgb(216, 217, 218);
+			border-left: none;
+			border-right: none;	
+			}
+
+.leavedelete {
+			  font-size: 16px;
+			  background-color: transparent;
+			  color: rgb(86, 87, 98);
+			  border-style: none;
+			  }
+
+.leavedelete:hover {color: rgb(78, 79, 235);font-weight: bold;}
+
+#delb {outline: none; border: none;}
+
+#leavereset {
+			font-size: 16px;
+			background-color: transparent;
+			color: rgb(86, 87, 98);
+			border-style: none;
+			}			
+
+#leavereset:hover {color: rgb(78, 79, 235);font-weight: bold;}
+
+#leavesave {
+			font-size: 16px;
+			background-color: transparent;
+			color: rgb(86, 87, 98);
+			border-style: none;
+			}
+			
+#leavesave:hover {color: rgb(78, 79, 235);font-weight: bold;}	
+
+#lperiod {
+ 		  outline: none;
+ 		  border: none;
+ 		  background-color:transparent;
+ 		  resize: none;
+ 		  text-align: center;
+ 		  }
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+  
 </style>
 
 </head>
-<body>
+<body id="bodyscr">
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 
 	  <div id="mainContent" class="contentWrap">
 
-<h1>Leave List</h1>
-<br/>
-<br/>
-<a href = "main.do">메인화면</a>
-<br/>
-<br/>
 
-<%=mem.getEmployee_id() %>님
-<br/>
-<br/>
+<div align="right" id="delb">
 
-<div align="right">
-<button type="button" class="btn btn-primary" id="delb" onclick="Leavedel()">삭제</button>
+
 </div>
-<br/>
-<br/>
-<div align="center">
-	<form action="leaveaddAf.do" method="post">		
-		<table border="1" class="table">		
-		<col width="50"><col width="200"><col width="200"><col width="150"><col width="118"><col width="100">
-			<thead class="thead-dark">
+
+<div align="center" style="outline: none; border: none;">
+	<form action="leaveaddAf.do" method="post">	
+		<table class="leavetable">	
+		<col width="65"><col width="215"><col width="215"><col width="165"><col width="118"><col width="115">
+			<thead>
 				<tr>
 					<th>No.</th>
 					<th>종류</th>										
@@ -109,7 +149,7 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
 			</thead>
 			<tbody id="tbody">														
 				<tr>
-					<td><input type="hidden" value="check"></td>
+					<td><button type="reset" id="leavereset">reset</button></td>
 					<td>
  						<select id="type" name="leave_type"> 							
  							<option name="leave_type">선택</option>
@@ -124,7 +164,7 @@ input[type="checkbox"]:checked{width: 17px; height: 17px;}
  					<td><input type="date" onchange="period()" id="leave_end" name="leave_end" ></td> 								
  					<td><input type="text" size="10" onchange="period()" id="lperiod" readonly="readonly" name="leave_period"> 						
  					</td>
-					<td><button type="submit" name="status" class="btn btn-primary" value="save">저장</button></td>
+					<td><button type="submit" name="status" id="leavesave" value="save">저장</button></td>
 				</tr>
 				<tr>		
 					<%=LeaveUtil.leavelist(session, list) %>
@@ -175,7 +215,7 @@ function period(){
 	var type = document.getElementById("type").value;
 	
 	if(type=="선택"){
-		alert("종류를 선택해 주세요!");
+		alert("종류를 선택해주시길 바랍니다.");
 		return;
 	} 	
 	
@@ -191,17 +231,13 @@ function period(){
 	var leave_start = start.replaceAll("-", "/");
 	var leave_end = end.replaceAll("-", "/");
 	
-	
-	
-	if(type == "오전반차" || type == "오후반차"){
-		type = "half";
+		if(type == "오전반차" || type == "오후반차"){
+			type = "half";
 			
-	} else if(type == "연차" || type == "병가" || type == "공가"){
-		type = "type";
+		} else if(type == "연차" || type == "병가" || type == "공가"){
+			type = "type";
 			
-	}
-			
-	
+		}
 	
 	if(type == "half") {
 		var lp = "0.5";  		
