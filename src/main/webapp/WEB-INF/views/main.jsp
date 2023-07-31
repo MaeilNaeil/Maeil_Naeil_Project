@@ -28,7 +28,7 @@ if (loginMember  == null || (loginMember .getEmployee_id() + "") == "" || (login
 if (loginMember.getNewfilename() != null && !loginMember.getNewfilename().isEmpty()) {
 	lowerFileName = loginMember.getNewfilename().toLowerCase();
 	} else {
-		lowerFileName = "base.PNG";
+		lowerFileName = "profile.png";
 	}
 
 MainResponse mainResponse = (MainResponse) request.getAttribute("mainResponse");

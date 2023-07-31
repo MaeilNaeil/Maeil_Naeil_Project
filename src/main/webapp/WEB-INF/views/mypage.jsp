@@ -21,7 +21,7 @@
 		if(dto.getNewfilename() != null && !dto.getNewfilename().isEmpty()) {
 			lowerFileName = dto.getNewfilename().toLowerCase();
 		} else {
-			lowerFileName = "base.PNG"; 
+			lowerFileName = "profile.png"; 
 		}
 		
 	/* if(lowerFileName != null){
