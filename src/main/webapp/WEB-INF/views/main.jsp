@@ -151,6 +151,10 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 	align-items:center;
 	border: none;
 	border-radius: 5px;
+}
+.abox{
+	margin: 10px;
+}
 </style>
 </head>
 <body>
@@ -217,7 +221,7 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 			</div>
 			
 			<div class="item content-2">
-				<a href="announcementmain.do">공지사항</a>
+				<a href="announcementmain.do"  class="abox">공지사항</a>
 				<jsp:include page="/WEB-INF/views/main_announce.jsp"></jsp:include>
 			</div>
 			
