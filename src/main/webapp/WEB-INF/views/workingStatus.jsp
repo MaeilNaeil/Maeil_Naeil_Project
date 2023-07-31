@@ -12,7 +12,7 @@
 	for(HashMap<String, Object> item : statusList ) {
 		System.out.println("jsp!!!!! >> "+item.get("employeeId"));	
 	}
-	
+	*/
 
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
