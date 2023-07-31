@@ -263,7 +263,8 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 						<%
 							if((i + dayOfWeek - 1)%7 == 0 && i != lastday){
 						%>
-						</tr><tr height="40" valign="top">
+						</tr>
+						<tr height="40" valign="top">
 						<%
 							}
 						}	
@@ -279,17 +280,11 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 						</tr>
 					</tbody>
 					</table>	
-					</div>
-			
 			</div>
-			
-			
-			</div>
-		</div>
 		
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	</div>	
-
+		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>	
+	</div>
 </body>
 <script type="text/javascript">
 	

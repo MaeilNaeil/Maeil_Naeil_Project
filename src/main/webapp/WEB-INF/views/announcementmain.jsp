@@ -37,10 +37,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
@@ -153,13 +149,13 @@ if(list == null || list.size() == 0){
 <button type="button" onclick="searchBtn()" class="btn btn-primary">검색</button>
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <script type="text/javascript">
 function searchBtn() {
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	location.href = "announcementmain.do?choice=" + choice + "&search=" + search;
 }
-
 $("#pagination").twbsPagination({
 	startPage:<%=pageNumber+1 %>,
 	totalPages:<%=annPage %>,
