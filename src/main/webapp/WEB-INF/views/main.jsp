@@ -58,10 +58,10 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 
 
 <style>
-.imgFile {
+.imgfile {
 	margin: 25px 10px 25px 25px;
-	width: 200px;
-	height: 250px;
+	width: 180px;
+	height: 180px;
 }
 .profile{
 	margin: 25px auto;
@@ -160,6 +160,7 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 			</div>
 			<div class="item content-2">
 				<a href="announcementmain.do">공지사항</a>
+				<jsp:include page="/WEB-INF/views/main_announce.jsp"></jsp:include>
 			</div>
 			<div class="item content-3">
 				<p>달력</p>
