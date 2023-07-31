@@ -26,7 +26,7 @@
 	text-align: center;
 }
 th{
-	width: 10px;
+	width: 20px;
 	text-align: center;
 } 
 

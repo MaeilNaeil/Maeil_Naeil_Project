@@ -121,10 +121,10 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 
 
 <style>
-.imgFile {
+.imgfile {
 	margin: 25px 10px 25px 25px;
 	width: 200px;
-	height: 250px;
+	height: 200px;
 }
 .profile{
 	margin: 25px auto;
@@ -157,11 +157,6 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 	<div class="wrap">
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-
-
-
-	
-
 		<div class="contentWrap mainContentWrap">
 			<div align="center" class="item content-1">
 				<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>"
@@ -223,6 +218,7 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 			
 			<div class="item content-2">
 				<a href="announcementmain.do">공지사항</a>
+				<jsp:include page="/WEB-INF/views/main_announce.jsp"></jsp:include>
 			</div>
 			
 			<!-- TODO : 메인에 달력 -->
