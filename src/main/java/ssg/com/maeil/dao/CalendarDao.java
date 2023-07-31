@@ -14,6 +14,7 @@ public interface CalendarDao {
 	
 	CalendarDto caldetail(int seq);
 	
+	List<CalendarDto> maincallist(CalendarParam param);
 	
 	
 	int calwrite(CalendarDto dto, String rdate);	

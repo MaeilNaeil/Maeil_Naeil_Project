@@ -1,5 +1,6 @@
 package ssg.com.maeil.controller;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ssg.com.maeil.dto.CalendarDto;
 import ssg.com.maeil.dto.CalendarParam;
 import ssg.com.maeil.dto.MemberDto;
+import ssg.com.maeil.dto.WorkingStatusTimeDto;
 import ssg.com.maeil.service.CalendarService;
-
+import ssg.com.maeil.service.WorkingStatusService;
 import util.CalendarUtil;
+import util.DateUtil;
 
 @Controller
 public class CalendarController {
@@ -28,7 +31,8 @@ public class CalendarController {
 	@Autowired
 	CalendarService service;
 		
-	
+	@Autowired
+	WorkingStatusService workingStatusService;
 	
 	@RequestMapping(value="calendarlist.do", method = { RequestMethod.GET, RequestMethod.POST })	
 	public String calendarlist(CalendarParam param, Model model, HttpSession session) {
@@ -62,6 +66,51 @@ public class CalendarController {
 		}		
 		
 		return "calendarlist";
+	}
+	
+	
+	
+	@RequestMapping(value="maincalendarlist.do", method = { RequestMethod.GET, RequestMethod.POST })	
+	public String maincalendarlist(CalendarParam param, Model model, HttpSession session) {
+		System.out.println("CalendarController maincalendarlist()" + new Date());	
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("login");
+		param.setEmployee_id(memberDto.getEmployee_id());
+		param.setDepartment_id(memberDto.getDepartment_id());
+		
+		int auth = memberDto.getAuth();
+		param.setAuth(auth);		
+				
+		String yyyyMM = "";
+			if(param.getRdate() != null && !param.getRdate().equals("")) {
+				yyyyMM = param.getRdate().substring(0, 4) + param.getRdate().substring(4, 6);
+			}
+						
+		Calendar cal = Calendar.getInstance();
+		if(yyyyMM == null || yyyyMM.trim().equals("")) {
+			yyyyMM = cal.get(Calendar.YEAR) + CalendarUtil.two((cal.get(Calendar.MONTH)+1) + "");			
+		}
+		
+		param.setYyyyMM(yyyyMM);
+			
+		List<CalendarDto> list = service.maincallist(param);
+		
+		/* ft 수정 시작 */
+		MemberDto dto =(MemberDto) session.getAttribute("login");
+		WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(dto.getEmployee_id());
+		LocalDateTime formatStartTime = DateUtil.stringToLocalDateTime(mainTimeDto.getStartWorkTime());
+	    LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
+		MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
+		model.addAttribute("mainResponse", mainResponse);
+		/* ft 수정 끝 */
+		
+		model.addAttribute("maincallist", list);
+				
+		for (CalendarDto calendarDto : list) {
+			System.out.println(calendarDto.toString());
+		}		
+		
+		return "main";
 	}
 	
 	

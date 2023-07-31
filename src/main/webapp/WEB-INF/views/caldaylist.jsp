@@ -27,7 +27,7 @@
 	
 	List<CalendarDto> list = (List)request.getAttribute("caldaylist");
 	
-		
+	
 %>
     
 <!DOCTYPE html>
@@ -36,55 +36,97 @@
 <meta charset="UTF-8">
 <title>일정목록</title>
 
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
+<style type="text/css">
 
+th, td {		
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		padding: 8px;		
+		}
+
+th {text-align: center;}
+
+.calday {
+		text-align: center;				
+		border-top: 1px solid rgb(216, 217, 218);
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		border-right: none;	
+		}
+		
+#detailA {
+		  text-decoration: none;		 	  
+		 }
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+  
+
+</style>
 
 </head>
-<body>
-
-<h2>일별일정</h2>
-<br/>
-<h3><%=year %>년 <%=month %>월 <%=day %>일의 일정</h3>
+<body id="bodyscr">
+<div class="wrap">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="contentWrap">
 
 <div align="center">
 	<form>
-		<table border="1" class="table table-hover">
+		<table  class="calday">
 		<col width="100"><col width="450"><col width="300">
-			<thead align="center" class="thead-dark">
+			<thead align="center">
 				<tr>
 					<th>번호</th><th>제목</th><th>시간</th>
+				</tr>
+				<%
+					if(list == null || list.size() <= 0){
+				%>		
+				 <tr>
+					<td colspan="3">작성된 일정이 없습니다.</td>
 				</tr>				
-					<%							
-					for(int i = 0; i < list.size(); i++) {						
-						CalendarDto dto = list.get(i);
-					%>
-					<tr>
-						<th><%=(i+1) %></th>
-							<td>
-								<a href="caldetail.do?seq=<%=dto.getSeq() %>">
-									<%=dto.getTitle() %>
-								</a>
-							</td>
-							<td><%=CalendarUtil.toDates(dto.getRdate()) %></td>
-					</tr>
-					<%
-					}
-					%>			
+				<%
+					} else {
+						for(int i = 0; i < list.size(); i++) {						
+							CalendarDto dto = list.get(i);					
+				%>
+				<tr>
+					<th><%=(i+1) %></th>
+						<td>
+							<a href="caldetail.do?seq=<%=dto.getSeq() %>" id="detailA">
+								<%=CalendarUtil.daylistdot3(dto.getTitle()) %>
+							</a>
+						</td>
+						<td><%=CalendarUtil.toDates(dto.getRdate()) %></td>
+				</tr>
+				<%						
+					}}
+				%>			
 			</thead>
-			<tbody></tbody>
+			<tbody>			
+			</tbody>
 		</table>
-	</form>
-	<br/>
+	</form>	
 	<br/>
 	<a href="calendarlist.do" class="btn btn-primary">일정목록</a>		
 </div>
-
+</div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
 

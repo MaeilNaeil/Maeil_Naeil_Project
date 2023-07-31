@@ -23,8 +23,10 @@ input {
 	margin-top: 5px;
 }
 .image-box {
-	    width:2100px;
-	    height:600px;
+	    /* width: 2100px;
+	    height: 600px; */
+	    width: 2100px;
+	    height: 1000px;
 	    overflow:hidden;
 	    margin:0 auto;
 }
@@ -36,21 +38,26 @@ input {
 table {
   border-collapse: separate;
   border-spacing: 0 10px;
+  margin-left: 500px;
+  margin-top: 550px;
+}
+
+th {
+	color: white;
+}
+.inputTable {
+	
 }
 </style>
 
 
 </head>
 
-<body>
+<body style="background-image:url('https://images.unsplash.com/photo-1523565543073-bf9608b265ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
 
 <form action="loginAf.do" method="post">
-<div align="center" class="image-box">
-	<img class="image-thumbnail"src="https://previews.123rf.com/images/morris71/morris712204/morris71220400215/185005523-%ED%9D%90%EB%A6%B0-%ED%91%B8%EB%A5%B8-%ED%95%98%EB%8A%98-%EB%B0%B0%EA%B2%BD%EC%9C%BC%EB%A1%9C-%EC%9C%A0%EB%A6%AC-%EA%B1%B4%EB%AC%BC%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%9C%A0%EB%A6%AC%EC%9D%98-%EA%B0%95%EC%B2%A0-%EB%B0%9D%EC%9D%80-%ED%8C%8C%EB%9E%80%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8C%80%ED%95%9C-%EC%9B%90%EA%B7%BC-%EA%B4%91%EA%B0%81-%EB%B3%B4%EA%B8%B0-%EB%AF%B8%EB%9E%98%EC%9D%98-%EC%83%81%EC%97%85-%ED%98%84%EB%8C%80-%EB%8F%84%EC%8B%9C-%EC%84%B1%EA%B3%B5%EC%A0%81%EC%9D%B8-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%9D%98.jpg" alt ="이미지">
-</div>
-<hr/>
 
-<div align="center">
+<div class="inputTable">
 	<table>
 		<tr>
 			<th>사원번호&emsp;</th>

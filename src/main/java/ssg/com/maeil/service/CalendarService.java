@@ -13,6 +13,8 @@ public interface CalendarService {
 	
 	List<CalendarDto> caldaylist(CalendarParam param);
 	
+	List<CalendarDto> maincallist(CalendarParam param);
+	
 	CalendarDto caldetail(int seq);
 	
 	boolean calwrite(CalendarDto dto, String rdate);	

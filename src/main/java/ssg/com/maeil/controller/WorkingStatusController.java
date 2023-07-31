@@ -1,5 +1,7 @@
 package ssg.com.maeil.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import ssg.com.maeil.dto.MemberDto;
-import javax.servlet.http.HttpServletRequest;
+
 import ssg.com.maeil.dto.MonthlyWorkDto;
 import ssg.com.maeil.dto.WorkingStatusDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
@@ -37,8 +43,9 @@ public class WorkingStatusController {
 		System.out.println(" move >>> workingStatus.jsp ");
 		
 		MemberDto loginMember =(MemberDto) request.getSession().getAttribute("login");
+		
 		List<HashMap<String, Object>> statusList = service.getWorkingStatus(loginMember.getEmployee_id());
-
+		
 		model.addAttribute("statusList", statusList);
 
 		return "workingStatus";
@@ -102,8 +109,8 @@ public class WorkingStatusController {
 				: LocalDate.of(now.getYear(), now.getMonth(), 1); /* 요청된 날짜가 없는경우 = 디폴트조회 = 조회당시월*/ 
 
 		MemberDto loginMember =(MemberDto) request.getSession().getAttribute("login");
+		
 		List<MonthlyWorkDto> monthlyWorkDtoList = service.getMonthlyWork(loginMember.getEmployee_id(), date);
-
 		List<MonthlyWorkInfo> monthlyWorkList = new ArrayList<>();
 //		List<MonthlyWorkInfo> result = new ArrayList<>();
 //		for(MonthlyWorkDto item : monthlyWorkList) {

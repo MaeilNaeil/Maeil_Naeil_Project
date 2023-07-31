@@ -46,6 +46,14 @@ public class CalendarDaoImpl implements CalendarDao {
 
 	
 	
+	@Override 
+	public List<CalendarDto> maincallist(CalendarParam param) { 
+		System.out.println("CalendarDaoImpl maincallist()" + new Date());			
+		return	session.selectList(ns + "maincalendarlist", param);
+	}
+
+	
+	
 	@Override
 	public int calwrite(CalendarDto dto, String rdate) {
 		System.out.println("CalendarDaoImpl calwrite()" + new Date());				

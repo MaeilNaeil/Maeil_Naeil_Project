@@ -8,10 +8,11 @@
 
 	List<HashMap<String, Object>> statusList = (List)request.getAttribute("statusList");
 	
+/* 	
 	for(HashMap<String, Object> item : statusList ) {
 		System.out.println("jsp!!!!! >> "+item.get("employeeId"));	
 	}
-	
+	*/
 
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
@@ -160,23 +161,23 @@
 						<!-- “VACATION”, “ABSENT”  -->
 						<td>
 						<%
-								if(status.get("startWorkTime") == null){
+							if(status.get("startWorkTime") == null){
 						%>
-
+							-
 						<%
-									}else{
+							}else{
 						%>
 							<%=status.get("startWorkTime") %>	
 						<%		
 							}					 
 						%>
 						</td>
-
 						<td>
 						<%
 							if(status.get("leaveWorkTime") == null){
 						%>
-								<%
+							-
+						<%
 							}else{
 						%>
 							<%=status.get("leaveWorkTime") %>	

@@ -1,3 +1,4 @@
+<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@page import="ssg.com.maeil.controller.MonthlyWorkInfo"%>
 <%@page import="ssg.com.maeil.dto.MonthlyWorkDto"%>
 <%@page import="java.util.HashMap"%>
@@ -8,7 +9,6 @@
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("login");
 %>
@@ -33,7 +33,7 @@
 			
 		} 
 		.fa-solid{
-					font-size: 28px;
+			font-size: 28px;
 			margin: 0 10px;
 			cursor: pointer;
 		}
@@ -65,7 +65,6 @@
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-
 
 <%
 	LocalDate date = (LocalDate) request.getAttribute("inquireDate");
@@ -113,7 +112,7 @@
 					if(day<7){
 						for(int i=0; i<day; i++){
 					%>
-					 <td style="background-color: #eeeeee"></td> 
+					 <td style="background-color: #eeeeee" ></td> 
 					<%
 						}
 					}
@@ -130,7 +129,6 @@
 							if(monthlyWorkList.size() != 0){		
 								for(MonthlyWorkInfo item : monthlyWorkList){
 									//System.out.println(item.getWorkingDate().getDayOfMonth());
-									
 									if(i == item.getWorkingDate().getDayOfMonth()){
 										DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 			    						
@@ -162,7 +160,8 @@
 					// i와 lastday가 같으면 개행 하지 않는다. 
 						if((i+day) % 7 == 0 && i != lastDay){
 					%>
-						</tr><tr height="120" align="left" valign="top">
+						</tr>
+						<tr height="120" align="left" valign="top">
 					<%	
 						}
 					 }

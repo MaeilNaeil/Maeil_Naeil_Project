@@ -45,6 +45,14 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	
 	@Override
+	public List<CalendarDto> maincallist(CalendarParam param) {
+		System.out.println("CalendarServiceImpl maincallist()" + new Date());		
+		return dao.maincallist(param);	
+	}
+	
+	
+	
+	@Override
 	public boolean calwrite(CalendarDto dto, String rdate) {
 		System.out.println("CalendarServiceImpl calwrite()" + new Date());		
 		return dao.calwrite(dto, rdate)>0?true:false;
