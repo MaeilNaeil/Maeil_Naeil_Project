@@ -16,6 +16,14 @@
 
 	MemberDto login = (MemberDto)session.getAttribute("login");
 
+	if(login == null || (login.getEmployee_id()+"") == "" ||(login.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 	
 %>
     
@@ -30,7 +38,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 
 </head>
 <body>

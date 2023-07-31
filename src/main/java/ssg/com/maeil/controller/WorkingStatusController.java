@@ -9,19 +9,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import ssg.com.maeil.dto.MemberDto;
+import javax.servlet.http.HttpServletRequest;
 import ssg.com.maeil.dto.MonthlyWorkDto;
 import ssg.com.maeil.dto.WorkingStatusDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
 import ssg.com.maeil.serviceImpl.WorkingStatusServiceImpl;
 import util.DateUtil;
+
+// TODO : 페이징, 휴가업데이트쿼리, 메인 버튼, 
 
 @Controller
 public class WorkingStatusController {
@@ -30,11 +33,12 @@ public class WorkingStatusController {
 	WorkingStatusServiceImpl service;
 	
 	@GetMapping("workingStatus.do")
-	public String moveWorkingStatus(Model model) {
+	public String moveWorkingStatus(HttpServletRequest request, Model model) {
 		System.out.println(" move >>> workingStatus.jsp ");
 		
-		List<HashMap<String, Object>> statusList = service.getWorkingStatus(2);
-		
+		MemberDto loginMember =(MemberDto) request.getSession().getAttribute("login");
+		List<HashMap<String, Object>> statusList = service.getWorkingStatus(loginMember.getEmployee_id());
+
 		model.addAttribute("statusList", statusList);
 
 		return "workingStatus";
@@ -89,7 +93,7 @@ public class WorkingStatusController {
 	
 	
 	@GetMapping("monthlyMyWork.do")
-	public String monthlyWork(String inputDate, Model model) {
+	public String monthlyWork(HttpServletRequest request, String inputDate, Model model) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate now = LocalDate.now();
 		System.out.println("inputDate >>"+inputDate);
@@ -97,8 +101,9 @@ public class WorkingStatusController {
 				  LocalDate.parse(inputDate, dtf) /* 요청된 날짜가 있는경우 = 해당 날짜로 화면 재랜더링*/ 
 				: LocalDate.of(now.getYear(), now.getMonth(), 1); /* 요청된 날짜가 없는경우 = 디폴트조회 = 조회당시월*/ 
 
-		List<MonthlyWorkDto> monthlyWorkDtoList = service.getMonthlyWork(2, date);
-		
+		MemberDto loginMember =(MemberDto) request.getSession().getAttribute("login");
+		List<MonthlyWorkDto> monthlyWorkDtoList = service.getMonthlyWork(loginMember.getEmployee_id(), date);
+
 		List<MonthlyWorkInfo> monthlyWorkList = new ArrayList<>();
 //		List<MonthlyWorkInfo> result = new ArrayList<>();
 //		for(MonthlyWorkDto item : monthlyWorkList) {

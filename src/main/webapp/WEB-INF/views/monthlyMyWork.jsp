@@ -5,8 +5,13 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	MemberDto dto = (MemberDto)session.getAttribute("login");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +20,44 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 	<style type="text/css">
+		.monthlyWorkWrap{
+			border: 1px solid lightgray;
+		}
+		table{
+			border: 1px solid lightgray;
+			/* margin: 0 auto; */
+			width: 100%;
+			
+		} 
 		.fa-solid{
-			font-size: 24px;
+					font-size: 28px;
+			margin: 0 10px;
+			cursor: pointer;
+		}
+		.calendarDate{
+			font-size: 28px;
+			margin: 0 4px;
+		}
+		.date{
+			border: none;
+		}
+		.tableTitle th{
+			text-align: center;
+		}
+		.timeLine{
+			/* text-align: center; */
+			padding: 4px 8px;
+			margin: 3px 2px;
+			border-radius: 5px;
+		}
+		.workTime{
+			background-color: lightsteelblue;
+		}
+		.leaveTime{
+			background-color: lightpink;
 		}
 	</style>
 </head>
@@ -26,10 +65,8 @@
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	
-	
 
-<!-- 		<a href="main.do">main</a> -->
+
 <%
 	LocalDate date = (LocalDate) request.getAttribute("inquireDate");
 	List<MonthlyWorkInfo> monthlyWorkList = (List)request.getAttribute("monthlyWorkList");
@@ -47,20 +84,20 @@
     
 %>
 	<div id="mainContent" class="contentWrap">
-		<div >
+		<div class="monthlyWorkWrap">
 			<table border="1">
-				<col width="120"><col width="120"><col width="120"><col width="120"><col width="120"><col width="120"><col width="120">
+				<col width="150"><col width="150"><col width="150"><col width="150"><col width="150"><col width="150"><col width="150">
 				<tr height="80">
 					<td colspan="7" align="center">
 						<span><i class="fa-solid fa-angles-left" onclick="minusYear()"></i></span>
 						<span><i class="fa-solid fa-angle-left" onclick="minusMonth()"></i></span>
-						<span><%=calendarDayFormat %></span>
+						<span class="calendarDate"><%=calendarDayFormat %></span>
 						<span><i class="fa-solid fa-angle-right" onclick="plusMonth()"></i></span>
 						<span><i class="fa-solid fa-angles-right" onclick="plusYear()"></i></span>
 					</td>
 				</tr>
 				
-				<tr height="30" style="background-color:#000; color:white;">
+				<tr height="50" style="background-color:#000; color:white;" class="tableTitle">
 					<th>sun</th>
 					<th>mon</th>
 					<th>tus</th>
@@ -70,7 +107,7 @@
 					<th>sat</th>
 				</tr>
 				
-				<tr height="100" align="left" valign="top">
+				<tr height="120" align="left" valign="top">
 					<%
 					// 첫 주 빈칸 구하는 공식
 					if(day<7){
@@ -85,14 +122,12 @@
 					for(int i=1; i<=lastDay; i++){
 					%>
 						<td style="color:#3c3c3c; padding-top:5px">
-							<%=i %>
+							<div class="date"><%=i %></div>
 							<%
 							// TODO : server에서 월 전체 리스트(null이면 null인대로)
 							// 		  총 데이터 보내주기 
 							//      -> ui는 최대한 데이터 가공 없이 출력하는 용도로만 바꾸기 
-							if(monthlyWorkList.size() != 0){
-								System.out.println("in!!");
-								
+							if(monthlyWorkList.size() != 0){		
 								for(MonthlyWorkInfo item : monthlyWorkList){
 									//System.out.println(item.getWorkingDate().getDayOfMonth());
 									
@@ -102,12 +137,12 @@
 										if(item.getStartWorkTime()!=null){
 											String startTimeFormat = item.getStartWorkTime().format(timeFormatter);
 										%>
-											<div>출근 : <%=startTimeFormat %></div>
+											<div class="timeLine workTime">출근 : <%=startTimeFormat %></div>
 										<%
 										if(item.getLeaveWorkTime()!=null){
 											String leaveTimeFormat = item.getLeaveWorkTime().format(timeFormatter);
 											%>
-												<div>퇴근 : <%=leaveTimeFormat %></div>
+												<div class="timeLine leaveTime">퇴근 : <%=leaveTimeFormat %></div>
 											<%
 											}else{
 											%>
@@ -127,7 +162,7 @@
 					// i와 lastday가 같으면 개행 하지 않는다. 
 						if((i+day) % 7 == 0 && i != lastDay){
 					%>
-						</tr><tr height="100" align="left" valign="top">
+						</tr><tr height="120" align="left" valign="top">
 					<%	
 						}
 					 }

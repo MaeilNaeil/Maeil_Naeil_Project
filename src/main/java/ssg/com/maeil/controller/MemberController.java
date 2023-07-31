@@ -4,16 +4,11 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ssg.com.maeil.dto.AnnouncementDto;
-import com.mysql.cj.Session;
 
 import ssg.com.maeil.dto.MemberDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
@@ -71,16 +65,19 @@ public class MemberController {
 	}
 		
 	@RequestMapping("main.do")
-	public String main(Model model) {
+	public String main( HttpServletRequest request, Model model ) {
 	System.out.println("MemberController main() " + new Date());
+	
+	MemberDto dto =(MemberDto) request.getSession().getAttribute("login");
 
 	// TODO : MainController 
 	// 출근시간/퇴근시간 조회 - 출/퇴근 시간 유무에 따라 버튼 활성화 유무 & 시간 출력 유무
-	WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(2);
+	WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(dto.getEmployee_id());
+
   
     LocalDateTime formatStartTime = DateUtil.stringToLocalDateTime(mainTimeDto.getStartWorkTime());
     LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
-	
+
 	MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
 	
 	/* 공지사항 내용 최상위 3개 가져오기 */

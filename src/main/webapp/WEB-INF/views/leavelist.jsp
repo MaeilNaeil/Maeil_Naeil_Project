@@ -22,6 +22,14 @@
 		int seq = leaveDto.getSeq();	    
 	}	
 	
+	if(mem == null || (mem.getEmployee_id()+"") == "" ||(mem.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 	
 %>
 
@@ -41,6 +49,7 @@
 
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 <style type="text/css">
 
 .trlist:hover {

@@ -19,6 +19,14 @@
     	    	
     	CalendarParam param = (CalendarParam)request.getAttribute("param");
     		
+    	if(login == null || (login.getEmployee_id()+"") == "" ||(login.getEmployee_id()+"") == null) {
+    		%>
+    		<script>
+    		alert("다시 로그인해주세요.");
+    		location.href="login.do";
+    		</script>
+    		<%
+    	} 
     %>
     
 <!DOCTYPE html>
@@ -34,7 +42,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
 <style type="text/css">
 th{

@@ -16,6 +16,16 @@
 	String search = Annsearch.getSearch();
 	MemberDto mem = (MemberDto)session.getAttribute("login");
 	
+
+	if(mem == null || (mem.getEmployee_id()+"") == "" ||(mem.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
+	
 %>     
 <!DOCTYPE html>
 <html>
@@ -31,7 +41,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
 <style type="text/css">
 .center{
