@@ -58,10 +58,10 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 
 
 <style>
-.imgFile {
+.imgfile {
 	margin: 25px 10px 25px 25px;
 	width: 200px;
-	height: 250px;
+	height: 200px;
 }
 .profile{
 	margin: 25px auto;
@@ -94,11 +94,6 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 	<div class="wrap">
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-
-
-
-	
-
 		<div class="contentWrap mainContentWrap">
 			<div align="center" class="item content-1">
 				<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>"

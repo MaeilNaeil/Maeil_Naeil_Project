@@ -11,7 +11,7 @@
     grid-template-columns: 0.5fr 0.8fr 1.1fr;
   	grid-template-rows: 150px 150px 700px 200px;
   	grid-template-areas:
-      "logo header header"
+      "header header header"
       "sidebar-1 contentWrap contentWrap"
       "sidebar-2 contentWrap contentWrap"
       "footer footer footer";
