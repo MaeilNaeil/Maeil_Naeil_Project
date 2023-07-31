@@ -6,9 +6,9 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("login");
 %>
@@ -126,7 +126,7 @@
 							// TODO : server에서 월 전체 리스트(null이면 null인대로)
 							// 		  총 데이터 보내주기 
 							//      -> ui는 최대한 데이터 가공 없이 출력하는 용도로만 바꾸기 
-							if(monthlyWorkList.size() != 0){								
+							if(monthlyWorkList.size() != 0){		
 								for(MonthlyWorkInfo item : monthlyWorkList){
 									//System.out.println(item.getWorkingDate().getDayOfMonth());
 									if(i == item.getWorkingDate().getDayOfMonth()){

@@ -16,20 +16,20 @@
 MemberDto loginMember = (MemberDto) session.getAttribute("login");
 String lowerFileName;
 
-if (loginMember == null || (loginMember.getEmployee_id() + "") == "" || (loginMember.getEmployee_id() + "") == null) {
+if (loginMember  == null || (loginMember .getEmployee_id() + "") == "" || (loginMember.getEmployee_id() + "") == null) {
 %>
 	<script>
-		alert("로그인해주세요");
-		location.href="login.do";
+	alert("다시 로그인해주세요.");
+	location.href="login.do";
 	</script>
 <%
 }
 
 if (loginMember.getNewfilename() != null && !loginMember.getNewfilename().isEmpty()) {
-lowerFileName = loginMember.getNewfilename().toLowerCase();
-} else {
-lowerFileName = "base.PNG";
-}
+	lowerFileName = loginMember.getNewfilename().toLowerCase();
+	} else {
+		lowerFileName = "base.PNG";
+	}
 
 MainResponse mainResponse = (MainResponse) request.getAttribute("mainResponse");
 System.out.println("mainResponse.getStartWorkTime >>> " + mainResponse.getStartWorkTime());
@@ -151,7 +151,6 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 	align-items:center;
 	border: none;
 	border-radius: 5px;
-}
 </style>
 </head>
 <body>
@@ -159,18 +158,19 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 
+
+
+	
+
 		<div class="contentWrap mainContentWrap">
 			<div align="center" class="item content-1">
-				<img 
-					<%-- src="http://localhost:9100/springSamples/upload/<%=lowerFileName%>" --%>
-					src="http://localhost:9100/Maeil_Naeil/upload/profile.png"
-					alt="프로필 이미지" class="imgFile"> 
+				<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>"
+						alt="프로필 이미지" class="imgfile">
 				<div  class="profile">
 					<div>
 					어서오세요<br> 
 					<%=loginMember.getEmployee_name() %> 님
 					</div> 
-	 				
 
 					<%
 					LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
@@ -181,22 +181,22 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 					if (hasStartWorkTime && hasLeaveWorkTime) {
 					%>
 					<div class="startWorkBtnWrap" style="display: flex;">
-						<p>출근 : &nbsp</p>
+						<p>출근 : &nbsp;</p>
 						<p><%=startWorkTime%></p>
 					</div>
 					<div class="leaveWorkBtnWrap" style="display: flex;">
-						<p>퇴근 : &nbsp</p>
+						<p>퇴근 : &nbsp;</p>
 						<p><%=leaveWorkTime%></p>
 					</div>
 					<%
 					} else if (!hasStartWorkTime && !hasLeaveWorkTime) {
 					%>
 					<div class="startWorkBtnWrap" style="display: flex;">
-						<p>출근 : &nbsp</p>
+						<p>출근 : &nbsp;</p>
 						<button class="startWorkBtn" onclick="startWork()">출근</button>
 					</div>
 					<div class="leaveWorkBtnWrap" style="display: flex;">
-						<p>퇴근 : &nbsp</p>
+						<p>퇴근 : &nbsp;</p>
 						<button class="leaveWorkBtnDisabled" onclick="leaveWork()"
 							disabled="disabled">퇴근</button>
 					</div>
@@ -204,17 +204,21 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 					} else if (hasStartWorkTime && !hasLeaveWorkTime) {
 					%>
 					<div class="startWorkBtnWrap" style="display: flex;">
-						출근 : &nbsp
+						출근 : &nbsp;
 						<%=startWorkTime%>
 					</div>
 					<div class="leaveWorkBtnWrap" style="display: flex;">
-						<p>퇴근 : &nbsp</p>
+						<p>퇴근 : &nbsp;</p>
 						<button class="leaveWorkBtn" onclick="leaveWork()">퇴근</button>
 					</div>
 					<%
 					}
 					%>
 				</div>
+	
+	
+	
+	
 			</div>
 			
 			<div class="item content-2">
@@ -292,7 +296,7 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 
 </body>
 <script type="text/javascript">
-
+	
 		const startWorkBtn = document.querySelector(".startWorkBtn");
 		const startWorkBtnWrap = document.querySelector(".startWorkBtnWrap");
 		const leaveWorkBtn = document.querySelector(".leaveWorkBtn");

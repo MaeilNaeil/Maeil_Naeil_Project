@@ -5,17 +5,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +76,7 @@ public class MemberController {
 	}
 		
 	@RequestMapping("main.do")
-	public String main( HttpServletRequest request, Model model) {
+	public String main( HttpServletRequest request, Model model) {	
 	System.out.println("MemberController main() " + new Date());
 	
 	MemberDto dto =(MemberDto) request.getSession().getAttribute("login");
@@ -89,10 +85,10 @@ public class MemberController {
 	// 출근시간/퇴근시간 조회 - 출/퇴근 시간 유무에 따라 버튼 활성화 유무 & 시간 출력 유무
 	
 	WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(dto.getEmployee_id());
-  
+	  
     LocalDateTime formatStartTime = DateUtil.stringToLocalDateTime(mainTimeDto.getStartWorkTime());
     LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
-	
+
 	MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
 	model.addAttribute("mainResponse", mainResponse);
 	

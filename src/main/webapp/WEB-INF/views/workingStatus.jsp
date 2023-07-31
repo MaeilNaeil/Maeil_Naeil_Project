@@ -10,9 +10,18 @@
 	
 /* 	
 	for(HashMap<String, Object> item : statusList ) {
-		System.out.println("jsp!!!!! >> "+item.get("employeeId"));
+		System.out.println("jsp!!!!! >> "+item.get("employeeId"));	
+	}
+	
+
+	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
 	} 
-*/
 %>
 <!DOCTYPE html>
 <html>
@@ -61,7 +70,6 @@
 	.absent{
 		background-color: lightgray;
 	}
-	
 	.work{
 		background-color: lightskyblue;
 		border: 0;
@@ -81,7 +89,7 @@
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
 	<div id="mainContent" class="contentWrap">
-		<h3>일별 근무 현황</h3>
+	<h3>일별 근무 현황</h3>
 		<table class="table">
 			<col width="100"><col width="120"><col width="100"><col width="200"><col width="200">
 	  		<thead class="thead-dark">
@@ -108,7 +116,7 @@
 									미출근
 								</div>				
 						<%
-								
+	
 							}else{
 								switch((String)status.get("workingStatus")){
 									case "in" :
@@ -164,7 +172,6 @@
 							}					 
 						%>
 						</td>
-						
 						<td>
 						<%
 							if(status.get("leaveWorkTime") == null){

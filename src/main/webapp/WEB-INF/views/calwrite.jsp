@@ -16,6 +16,14 @@
 
 	MemberDto login = (MemberDto)session.getAttribute("login");
 
+	if(login == null || (login.getEmployee_id()+"") == "" ||(login.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 	
 %>
     
@@ -76,6 +84,7 @@ th {text-align: center;	/* background-color: rgb(216, 217, 218); */}
 #bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
 
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 
 </head>
 <body id="bodyscr">

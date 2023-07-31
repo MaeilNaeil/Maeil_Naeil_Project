@@ -19,27 +19,30 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <style type="text/css">
 .center{
-	margin: auto;
-	width: 1000px;
 	text-align: center;
 }
 th{
-	background: royalblue;
-	color: white;
+	width: 10px;
+	text-align: center;
 } 
-tr {
-   line-height: 12px;   
+
+td{
+	text-align: center;
+	align-content:center;
+	padding-right: 0px;
+}
+a{
+	margin: 20px;
 }
 </style>
 </head>
 <body>
 <table class="table table-hover">
-<col width="50"><col width="300"><col width="60"><col width="100"><col width="50">
+<col width="20"><col width="40">
 
 <%
 if(list == null || list.size() == 0){
@@ -53,23 +56,18 @@ if(list == null || list.size() == 0){
 		AnnouncementDto ann = list.get(i);
 		String date = ann.getWriting_period().substring(0, 10);
 		%>
-	
 		<tr>
-				<td><%=ann.getType() %></td>			
+				<th><%=ann.getType() %></th>			
 				<td style="text-align: left;">				
 					<a href="announcementdetail.do?seq=<%=ann.getSeq() %>">
-						<%=AnnouncementUtil.titleDot(ann.getTitle()) %>
+						<%=AnnouncementUtil.titleDot1(ann.getTitle()) %>
 					</a>			
 				</td>
-				<td><%=ann.getEmployee_name() %></td>
-				<td><%=date %></td>		
 		</tr>
 				<% 
-			
-			
 	}
 }
-			%>
+		%>
 </table>
 </body>
 </html>

@@ -11,11 +11,25 @@
 
 .title {
 	margin-top: 30px;
-	margin-bottom: 50px;
-	
+	margin-bottom: 50px;	
+}
+.content {
+	margin-left: 40px;
+}
+#employee_id {
+	width: 300px;
+}
+#employee_email {
+	width: 300px;
 }
 
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -23,23 +37,32 @@
 <body>
 
 <div align="center" class="title">
-<h1>비밀번호 찾기</h1>
+<h3>비밀번호 찾기</h3>
 </div>
 <hr/>
+<div class="content">
 <p>아이디를 입력하세요.</p>
-사원번호 : <input type="text" name="employee_id" id="employee_id" />
+<p>사원번호<p>
+<input type="text" name="employee_id" id="employee_id" class="form-control" />
+</div>
+<hr/>
+<div class="content">
 <p>마이페이지에 등록하신 이메일을 입력하세요.</p>
-이메일 : <input type="text" name="employee_email" id="employee_email" />
-
+<p>이메일</p>
+<input type="text" name="employee_email" id="employee_email" class="form-control" />
+</div>
 <hr/>
+
+<div>
 <p align="center">
-<input type="button" onclick="findpwd()" value="비밀번호 찾기" />
+<input type="button" class="btn btn-outline-dark" onclick="findpwd()" value="비밀번호 찾기" />
 </p>
+</div>
 
 <hr/>
 <p align="center">
-<input type="button" onclick="back()" value="뒤로" />
-<input type="button" onclick="exit()" value="닫기" />
+<input type="button" class="btn btn-outline-dark" onclick="back()" value="뒤로" />
+<input type="button" class="btn btn-outline-dark" onclick="exit()" value="닫기" />
 </p>
 
 

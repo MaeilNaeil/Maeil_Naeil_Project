@@ -22,6 +22,14 @@
 		int seq = leaveDto.getSeq();	    
 	}	
 	
+	if(mem == null || (mem.getEmployee_id()+"") == "" ||(mem.getEmployee_id()+"") == null) {
+		%>
+		<script>
+		alert("다시 로그인해주세요.");
+		location.href="login.do";
+		</script>
+		<%
+	} 
 	
 %>
 

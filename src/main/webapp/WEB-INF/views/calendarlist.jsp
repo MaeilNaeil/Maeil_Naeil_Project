@@ -19,6 +19,14 @@
     	    	
     	CalendarParam param = (CalendarParam)request.getAttribute("param");
     		
+    	if(login == null || (login.getEmployee_id()+"") == "" ||(login.getEmployee_id()+"") == null) {
+    		%>
+    		<script>
+    		alert("다시 로그인해주세요.");
+    		location.href="login.do";
+    		</script>
+    		<%
+    	} 
     %>
     
 <!DOCTYPE html>

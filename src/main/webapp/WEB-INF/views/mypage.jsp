@@ -12,7 +12,7 @@
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
 		<script>
-		alert("로그인해주세요");
+		alert("다시 로그인해주세요.");
 		location.href="login.do";
 		</script>
 		<%
@@ -23,7 +23,7 @@
 		} else {
 			lowerFileName = "base.PNG"; 
 		}
-	
+		
 	/* if(lowerFileName != null){
 	System.out.println("lowerFileName 값 확인 : " + lowerFileName);
 	} */
@@ -47,51 +47,53 @@
 <style>
 #mainContent {
 	margin-top: 50px;
-	padding-left: 200px;
+}
+
+table {
+	margin-left: 350px;
 }
 
 .imgfile {
-	width:60px;
-	height:75px;
+	
+	width: 150px;
+	height: 150px;
+	border-color: white;
 }
 
 .content {
-    width: 700px;
+    width: 500px;
 }
 
 .mypageval {
 	border-radius: 10px;
-	padding : 5px;
-	width: 300px;
-	height: 50px;
-	font-size: 1.2em;
+	padding-left : 20px;
+	width: 200px;
+	height: 40px;
+	font-size: 12px;
 }
 
 select {
 	border-radius: 10px;
-	padding : 10px;
-	padding-left : 20px;
-	width: 300px;
-	height: 50px;
-	font-size: 1.2em;
+	padding-left : 15px;
+	width: 200px;
+	height: 40px;
+	font-size: 12px;
 	color: black;
 	border: 2px solid black;
 } 
 select[disabled] {
 	border-radius: 10px;
-	padding : 10px;
-	padding-left : 20px;
-	width: 300px;
-	height: 50px;
-	font-size: 1.2em; 
+	padding-left : 15px;
+	width: 200px;
+	height: 40px;
+	font-size: 12px; 
 	color: black; /* 텍스트 색상 */
 	cursor: not-allowed; /* 커서 모양 */
 	border: 2px solid black; /* 테두리 스타일 */
 }
 
 th {
-	font-size: 1.2em;
-	text-align: center;
+	font-size: 16px;
 }
 
 </style>
@@ -108,8 +110,9 @@ th {
 </div>
 <hr/>
 
-<div align="center">
-<img src="http://localhost:9300/springSamples/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
+<div align="center" class="imgContent">
+	<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>"
+			alt="프로필 이미지" class="imgfile">
 </div>
 
 <form action="upload.do" method="post" enctype="multipart/form-data">
@@ -118,38 +121,38 @@ th {
 	<br/><br/>
 	<input type="hidden" name="employee_id" value="<%=dto.getEmployee_id() %>">
 	<input type="file" name="fileupload" id="fileupload" style="display:none;">
-	<label for="fileupload" class="uploadBtn">사진 등록</label>
-	&nbsp;&nbsp;&nbsp;<input type="submit" value="저장">
+	<label for="fileupload" class="btn btn-info" style="margin-bottom:0px;">사진 등록</label>
+	&emsp;<input type="submit" value="저장" class="btn btn-info">
 </div>
 </form>
 
-<br/><hr/>
+<br/>
 
 <div class="content">
 	<table class="table">
 		<tr>
 			<th>사번</th>
 			<td>
-				<input type="text" name="employee_id" id="employee_id" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_id() %>" readonly="readonly">
+				<input type="text" name="employee_id" id="employee_id" class="mypageval" value="<%=dto.getEmployee_id() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<th>이름</th>
 			<td>
-				<input type="text" name="employee_name" id="employee_name" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_name() %>" readonly="readonly">
+				<input type="text" name="employee_name" id="employee_name" class="mypageval" value="<%=dto.getEmployee_name() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<th>직위</th>
 			<td>
-				<input type="text" name="erank" id="erank" class="mypageval" style="padding-left: 30px;" value="<%=dto.getErank() %>" readonly="readonly">
+				<input type="text" name="erank" id="erank" class="mypageval" value="<%=dto.getErank() %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<th>이메일</th>
 			<td>
-				<input type="text" name="employee_email" id="employee_email" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEmployee_email() %>" readonly="readonly">
-				<input type="button" onclick="emailchkBtn()" class="emailchk" name="emailchk" id="emailchk" value="확인"  style="display: none;">
+				<input type="text" name="employee_email" id="employee_email" class="mypageval" value="<%=dto.getEmployee_email() %>" readonly="readonly">
+				&nbsp;<input type="button" onclick="emailchkBtn()" class="btn btn-light" name="emailchk" id="emailchk" value="확인"  style="display: none;">
 			</td>
 		</tr>
 
@@ -171,16 +174,16 @@ th {
 			</td>
 		</tr>
 		<tr>
-			<th>입사일&nbsp;&nbsp;</th>
+			<th>입사일</th>
 			<td>
-				<input type="text" name="edate" id="edate" class="mypageval" style="padding-left: 30px;" value="<%=dto.getEdate().substring(0,10) %>" readonly="readonly">
+				<input type="text" name="edate" id="edate" class="mypageval" value="<%=dto.getEdate().substring(0,10) %>" readonly="readonly">
 			</td>
 		</tr>
 		<tr align="center">
 			<td colspan="2">
-				<input type="button" onclick="changeInfo()" class="changeBtn" name="changeInfo" id="changeInfo" value="나의 정보변경">
-				<input type="button" onclick="changePwd()" class="changeBtn" name="changePwd" id="changePwd" value="비밀번호 변경">		
-				<input type="button" onclick="cancelBtn()" class="changeBtn" name="cancelBtn" id="cancelBtn" value="취소"  style="display: none;">
+				<input type="button" onclick="changeInfo()" class="btn btn-info" name="changeInfo" id="changeInfo" value="나의 정보변경">
+				&emsp;<input type="button" onclick="changePwd()" class="btn btn-info" name="changePwd" id="changePwd" value="비밀번호 변경">		
+				<input type="button" onclick="cancelBtn()" class="btn btn-info" name="cancelBtn" id="cancelBtn" value="취소"  style="display: none;">
 			</td>
 		</tr>
 	</table>
@@ -221,6 +224,7 @@ function emailchkBtn() {
 		/* 	alert((response)); */
 			if( response == "USE_YES") {
 				alert("사용가능한 이메일입니다");
+				inputEmail = $("#employee_email").val().trim();
 				saveYn = "YES";
 				return;
 			} else if ($("#employee_email").val().trim() == ("<%=dto.getEmployee_email()%>")) {
@@ -260,8 +264,8 @@ function changeInfo() {
 		
 	} else {
 
-				
-		if(inputEmail != $("#employee_email").val().trim() ||saveYn == "NO"){
+		
+		if(inputEmail != $("#employee_email").val().trim() || saveYn == "NO"){
 			alert("이메일을 확인해주세요.");
 			return;
 		}
@@ -314,7 +318,7 @@ function changeInfo() {
 }
 
 function changePwd() {
-	window.open('changePwd.do','비밀번호 변경하기','width=430,height=500,location=no,status=no,scrollbars=yes');
+	window.open('changePwd.do','비밀번호 변경하기','width=450,height=400,location=no,status=no,scrollbars=yes');
 }
 
 function cancelBtn() {
