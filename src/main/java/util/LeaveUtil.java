@@ -37,7 +37,7 @@ public class LeaveUtil {
 				str += "</td>";
 				str += "<td><input type='checkbox' class='chkbox' name='checked' value='";
 				str += dto.getSeq();
-				str += "'></td>";
+				str += "'>&nbsp;<button type='button' onclick='Leavedel()' class='leavedelete'>삭제</button></td>";
 				
 			}			
 		}		
