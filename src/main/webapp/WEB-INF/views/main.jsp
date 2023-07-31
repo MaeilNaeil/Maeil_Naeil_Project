@@ -1,10 +1,15 @@
+<%@page import="util.CalendarUtil"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="ssg.com.maeil.dto.CalendarDto"%>
+<%@page import="java.util.List"%>
+<%@page import="ssg.com.maeil.dto.CalendarParam"%>
+<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.Date"%>
 <%@page import="ssg.com.maeil.controller.MainResponse"%>
 <%@page import="javax.print.attribute.standard.DateTimeAtCompleted"%>
-<%@page import="ssg.com.maeil.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -34,6 +39,64 @@ boolean hasStartWorkTime = mainResponse.getStartWorkTime() != null;
 boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 %>
 
+<%
+CalendarParam param = (CalendarParam)request.getAttribute("param");
+
+List<CalendarDto> list = (List)request.getAttribute("callist");
+
+List<CalendarDto> maincallist = (List)request.getAttribute("maincallist");
+
+Calendar cal = Calendar.getInstance();
+cal.set(Calendar.DATE, 1);
+
+String syear = request.getParameter("year");
+String smonth = request.getParameter("month");
+
+int year = cal.get(Calendar.YEAR);
+if(CalendarUtil.nvl(syear) == false) {	
+	year = Integer.parseInt(syear);
+}
+
+int month = cal.get(Calendar.MONTH)+1;	
+if(CalendarUtil.nvl(smonth) == false) {
+	month = Integer.parseInt(smonth);
+}
+
+if(month < 1) {
+	month = 12;
+	year--;
+}
+
+if(month > 12) {
+month = 1;
+year++;
+}
+
+cal.set(year, month-1, 1);
+
+int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+
+// <<	year--
+String pp = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
+				+ "<img src='./images/left.png' width='20px' height='23px' >"
+				+ "</a>", year-1, month);
+
+// <	month--
+String p = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
+				+ "<img src='./images/prec.png' width='20px' height='23px' >"
+				+ "</a>", year, month-1);
+
+// >	month++
+String n = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
+				+ "<img src='./images/next.png' width='20px' height='23px' >"
+				+ "</a>", year, month+1);
+
+// >>	year++
+String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style='text-decoration: none'>"
+				+ "<img src='./images/last.png' width='20px' height='23px' >"
+				+ "</a>", year+1, month);	
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -104,7 +167,6 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 					<%=loginMember.getEmployee_name() %> 님
 					</div> 
 
-
 					<%
 					LocalDateTime responseStartTime = mainResponse.getStartWorkTime();
 					String startWorkTime = hasStartWorkTime ? responseStartTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")) : null;
@@ -153,16 +215,80 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 	
 	
 			</div>
+			
 			<div class="item content-2">
 				<a href="announcementmain.do">공지사항</a>
 			</div>
-			<div class="item content-3">
-				<p>달력</p>
+			
+			<!-- TODO : 메인에 달력 -->
+			<div class="item content-3">					
+					<table width="100%" height="100%">
+					<thead>			
+						<tr height="20">
+							<td colspan="7" align="center">
+								<%=pp %>&nbsp;<%=p %>&nbsp;&nbsp;			
+								<font style="color: #3c3c3c; font-size: 15px; font-family: sans-serif;">
+								<%=String.format("%d년&nbsp;&nbsp;%2d월", year, month) %>
+								</font>			
+								&nbsp;&nbsp;<%=n %>&nbsp;<%=nn %>
+							</td>
+						</tr>	
+						<tr height="5" align="center" style="background-color: rgb(68, 67, 88); color: white;">
+							<th style="color:red;">SUN</th>
+							<th>MON</th>
+							<th>TUS</th>
+							<th>WED</th>
+							<th>THU</th>
+							<th>FRI</th>
+							<th style="color:blue;">SAT</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr height="40" valign="top">
+						<%	
+						for(int i = 1; i < dayOfWeek; i++){
+						%>
+							<td style="background-color: rgba(216, 217, 218, 0.3)">&nbsp;</td>
+						<%
+						}
+	
+						int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+						for(int i = 1; i <= lastday; i++) {
+						%>
+							<td style="background-color:rgb(255, 255, 255); padding-top: 5px">
+							<%=CalendarUtil.daylist(year, month, i) %>&nbsp;&nbsp;<%=CalendarUtil.calwrite(year, month, i) %>
+							<%=CalendarUtil.mainmakeTable(year, month, i, maincallist) %>			
+							</td>
+						<%
+							if((i + dayOfWeek - 1)%7 == 0 && i != lastday){
+						%>
+						</tr><tr height="40" valign="top">
+						<%
+							}
+						}	
+	
+						cal.set(Calendar.DATE, lastday);
+						int weekday = cal.get(Calendar.DAY_OF_WEEK);
+						for(int i = 0; i < 7 - weekday; i++) {	
+						%>
+							<td style="background-color: rgba(216, 217, 218, 0.3)">&nbsp;</td>
+						<%
+						}
+						%>
+						</tr>
+					</tbody>
+					</table>	
+					</div>
+			
+			</div>
+			
+			
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	</div>	
 
-	</div>
 </body>
 <script type="text/javascript">
 	
@@ -220,6 +346,11 @@ boolean hasLeaveWorkTime = mainResponse.getLeaveWorkTime() != null;
 				 })
 			} 
 		}
+		
+		
+		
+		
+		
 </script>
 
 

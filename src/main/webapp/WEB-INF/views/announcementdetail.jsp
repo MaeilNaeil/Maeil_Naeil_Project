@@ -29,67 +29,94 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="jquery/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+<style type="text/css">
+
+.center{
+	margin: 10px 10px 10px 10px;  
+	text-align: right;
+	
+}
+.titlebox{
+	width: 100%;
+	height: 100px;
+	padding-left:30px;
+}
+input{
+	border: none;
+}
+textarea{
+	width: 100%;	
+	resize: none;
+	padding: 30px;
+}
+.wrap{
+	align-content: center;
+}
+table {
+	width: 100%;
+	border: none;
+}
+.indel{
+	padding-right: 250px;
+}
+.spanbox{
+	padding-right: 40px;
+	padding-bottom: 30px;
+}
+#update,#delete{
+	width: 80px;
+	height:40px;
+}
+</style>
 </head>
 <body>
-	<div class="wrap">
+	<div width="100%" height="100%" class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	
-	  <div id="mainContent" class="contentWrap">
-	
-	<div align="center">
-		<h1>디테일</h1>
-		<hr>
-		
+<div id="mainContent" class="contentWrap">
+	<div class="center">
 	<form id="frm" method="post">
 	<table>
 		<tr>
 			<td>
-				<input type="text" name="title" readonly="readonly" value="[<%=ann.getType() %>]<%=ann.getTitle() %>">
+				<input type="text" class="titlebox" name="title" readonly="readonly" value="[<%=ann.getType() %>]<%=ann.getTitle() %>">
 			</td>
 		</tr>
 		<tr>
 			<td>
 				
-				<input type="text" name="writing_period" value="<%=ann.getWriting_period() %>" readonly="readonly">
+				<input type="text" class="periodbox" name="writing_period" value="<%=ann.getWriting_period() %>" readonly="readonly">
 			</td>
 		</tr>
-
-		<tr>
-			
+		<tr>	
 			<td>
-				<textarea rows="20" cols="30" name="content" readonly="readonly"><%=ann.getContent() %></textarea>
+				<textarea rows="20" cols="30" style="height: 480px" name="content" readonly="readonly"><%=ann.getContent() %></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<span id="urlText"><%=currentURL %></span>
+			<td class="spanbox">
+				<span id="urlText" style="font-size: 17px"><%=currentURL %></span>
 					<span class="button gray medium"><a href="#" onclick="clip(); return false;">URL주소복사</a></span>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td class="indel">
 			<%
 				if(mem.getAuth()==3){
 					%>
-					<input type="hidden" name="seq" value="<%=ann.getSeq() %>">
-					<input type="button" id="update" value="수정하기" />
-					<input type="button" id="delete" value="삭제" />
+					<input type="hidden" name="seq" value="<%=ann.getSeq() %>"/>
+					<input type="button" id="update" value="수정" />&nbsp;&nbsp;&nbsp;            
+					<input type="button" id="delete" value="삭제" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 			%>
-				<a href="announcementmain.do">공지사항 보기</a>
+				<a href="announcementmain.do">공지사항</a>
 			</td>
 		</tr>
 	</table>
-	</form>
-	
-	
-	
-	
-	</div>
+	</form>	
+</div>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -107,10 +134,6 @@ $(document).ready(function(){
 	
 });
 
-
-</script>
-<script type="text/javascript">
-
 function clip(){
 
 	var url = '';
@@ -123,13 +146,6 @@ function clip(){
 	document.body.removeChild(textarea);
 	alert("URL이 복사되었습니다.")
 }
-
-</script>
-	
-	
-<script type="text/javascript">
-
-
 </script>	
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

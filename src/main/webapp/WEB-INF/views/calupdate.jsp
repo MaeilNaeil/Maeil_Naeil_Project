@@ -35,8 +35,67 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
+
+<style type="text/css">
+
+th, td {		
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		padding: 8px;		
+		}
+
+th {text-align: center;}
+
+
+.insty {
+		 outline: none;
+		 border: none;
+		 background-color:transparent;
+		 resize: none;
+		}
+
+.calupdatetable {
+				text-align: center;				
+				border-top: 1px solid rgb(216, 217, 218);
+				border-bottom: 1px solid rgb(216, 217, 218);
+				border-left: none;
+				border-right: none;
+				}
+
+#caldate, #calshare, #caltitle {text-align: left;}
+
+#detailcontent {
+				text-align:justify;			
+				padding-left: 20px;
+				padding-right: 20px;
+				height: 450px;
+				line-height: 20pt;
+				overflow: auto;
+				}
+
+/* 스크롤바 */
+#detailcontent::-webkit-scrollbar {width: 10px;}
+#detailcontent::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#detailcontent::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+
+</style>
+
 </head>
-<body>
+<body id="bodyscr">
+<div class="wrap">
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
+	
+	  <div id="mainContent" class="contentWrap">
 
 <%
 
@@ -55,14 +114,11 @@
 %>
 	 
 
-<h1>일정수정</h1>
-<br/>
-<br/>
 <div align="center">
 	<form action="calupdateAf.do" method="post">
-		<table border="1" class="table">
-		<col width="200"><col width="500">
-			<thead class="thead-dark">
+		<table class="calupdatetable">
+		<col width="100"><col width="800">
+			<thead>
 				<tr>
 				<th>작성자</th>
 				<td>
@@ -72,41 +128,49 @@
 			</tr>
 			<tr>
 				<th>일정</th>
-				<td>
-					<input type="date" name="date" value="<%=date %>">
+				<td id="caldate">
+					<input type="date" name="date" value="<%=date %>">&emsp;
 					<input type="time" name="time" value="<%=time %>">
 				</td>
 			</tr>
 			<tr>
 				<th>공유</th>
-				<td>				
-					<input id="first_radio" class="radio" type="radio" name="share" value="1">공개
-					<input id="second_radio" type="radio" name="share" value="2">비공개
+				<td id="calshare">				
+					<input type="radio" name="share" class="radio" id="first_radio" value="1" checked="checked">공개&emsp;&emsp;
+					<input type="radio" name="share" id="second_radio" value="2">비공개
 				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="title" value="<%=dto.getTitle() %>">
+					<input type="text" size="100" maxlength="50" name="title" class="insty" id="caltitle" value="<%=dto.getTitle() %>">
 				</td>
 			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					<input type="text" name="content" value="<%=dto.getContent() %>">
+			<tr>				
+				<td colspan="2">					
+					<textarea rows="18" cols="95" maxlength="4000" name="content" class="insty" id="detailcontent"><%=dto.getContent() %></textarea>
 				</td>
 			</tr>			
 			</thead>
 			<tbody></tbody>
-		</table>
+		</table>		
 		<br/>
-		<br/>
+		<button type="button" onclick="calendarlist()" class="btn btn-primary">일정목록</button>
 		<button type="submit" class="btn btn-primary">수정완료</button>
 	</form>
 </div>
 
+<script type="text/javascript">
 
- 
+function calendarlist() {	
+	location.href = "calendarlist.do";
+}
+
+</script>
+
+ </div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+</div>
 
 </body>
 </html>

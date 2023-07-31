@@ -1,10 +1,13 @@
 package ssg.com.maeil.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import ssg.com.maeil.dto.AnnouncementDto;
+import ssg.com.maeil.dto.CalendarDto;
+import ssg.com.maeil.dto.CalendarParam;
+
+import com.mysql.cj.Session;
 
 import ssg.com.maeil.dto.MemberDto;
 import ssg.com.maeil.dto.WorkingStatusTimeDto;
 import ssg.com.maeil.service.AnnouncementService;
+import ssg.com.maeil.service.CalendarService;
 import ssg.com.maeil.service.MemberService;
 import ssg.com.maeil.service.WorkingStatusService;
 import util.DateUtil;
@@ -36,6 +44,9 @@ public class MemberController {
 	
 	@Autowired
 	WorkingStatusService workingStatusService;
+	
+	@Autowired
+	CalendarService calendarService;
 	
 	@Autowired
 	AnnouncementService announcementService;
@@ -65,20 +76,21 @@ public class MemberController {
 	}
 		
 	@RequestMapping("main.do")
-	public String main( HttpServletRequest request, Model model ) {
+	public String main( HttpServletRequest request, Model model) {	
 	System.out.println("MemberController main() " + new Date());
 	
 	MemberDto dto =(MemberDto) request.getSession().getAttribute("login");
 
 	// TODO : MainController 
 	// 출근시간/퇴근시간 조회 - 출/퇴근 시간 유무에 따라 버튼 활성화 유무 & 시간 출력 유무
+	
 	WorkingStatusTimeDto mainTimeDto = workingStatusService.getWorkingStatusTime(dto.getEmployee_id());
-
-  
+	  
     LocalDateTime formatStartTime = DateUtil.stringToLocalDateTime(mainTimeDto.getStartWorkTime());
     LocalDateTime formatLeaveTime = DateUtil.stringToLocalDateTime(mainTimeDto.getLeaveWorkTime());
 
 	MainResponse mainResponse = new MainResponse(formatStartTime, formatLeaveTime);
+	model.addAttribute("mainResponse", mainResponse);
 	
 	/* 공지사항 내용 최상위 3개 가져오기 */
 	List<AnnouncementDto> list = announcementService.recentThreeAnnounce();
@@ -86,8 +98,24 @@ public class MemberController {
 	for(AnnouncementDto a : list) {
 		System.out.println(a.toString());
 	}
+
+	/* 이번달 일정 가져오기 */
+	/* ft 수정 시작 */
+	CalendarParam cp = new CalendarParam();
+	int employee_id = dto.getEmployee_id();
+	int department_id = dto.getDepartment_id();
+	int auth = dto.getAuth();
+	Date now = new Date();
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+	String yyyyMM = formatter.format(now);
+	cp.setEmployee_id(employee_id);
+	cp.setDepartment_id(department_id);
+	cp.setAuth(auth);
+	cp.setYyyyMM(yyyyMM);
+	List<CalendarDto> clist = calendarService.maincallist(cp);
+	model.addAttribute("maincallist", clist);
+	/* ft 수정 끝 */
 	
-	model.addAttribute("mainResponse", mainResponse);
 	return "main";
 	}
 	

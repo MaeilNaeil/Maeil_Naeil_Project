@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
-
 <style>
 	.nav_list{
 		font-size: 16px;
 	}
 </style>
-
 <% MemberDto dto = (MemberDto)session.getAttribute("login"); %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">

@@ -38,24 +38,67 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
+
+<style type="text/css">
+
+th, td {		
+		border-bottom: 1px solid rgb(216, 217, 218);
+		border-left: none;
+		padding: 8px;		
+		}
+
+th {text-align: center;	/* background-color: rgb(216, 217, 218); */}
+
+/* input&textarea 투명하게*/
+.insty {
+		 outline: none;
+		 border: none;
+		 background-color:transparent;
+		 resize: none;
+		}
+
+.calwritetable {
+				text-align: center;				
+				border-top: 1px solid rgb(216, 217, 218);
+				border-bottom: 1px solid rgb(216, 217, 218);
+				border-left: none;
+				border-right: none;				
+				}
+
+#caldate, #calshare, #caltitle {text-align: left;}
+
+/* 스크롤바 */
+#scrhidden {overflow: auto;}
+#scrhidden::-webkit-scrollbar {width: 10px;}
+#scrhidden::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#scrhidden::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+
+/* body 스크롤바 */
+#bodyscr {overflow: auto;}
+#bodyscr::-webkit-scrollbar {width: 5px;}
+#bodyscr::-webkit-scrollbar {height: 5px;}
+#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
+#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
+
+</style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
 
 </head>
-<body>
-<div class="container">
+<body id="bodyscr">
+<div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
-	  <div id="mainContent" class="content">
-
-<h1>일정작성</h1>
-<br/>
-<br/>
+	  <div id="mainContent" class="contentWrap">
+	
 <div align="center">
 	<form action="calwriteAf.do" method="post">
-		<table border="1" class="table">
-		<col width="200"><col width="500">
-			<thead class="thead-dark">
+		<table  class="calwritetable">
+		<col width="100"><col width="800">
+			<thead>
 				<tr>
 					<th>작성자</th>
 					<td>							
@@ -65,38 +108,35 @@
 				</tr>
 				<tr>
 					<th>일정</th>
-					<td>
-						<input type="date" name="date" id="date">&nbsp;
+					<td id="caldate">
+						<input type="date" name="date" id="date">&emsp;
 						<input type="time" name="time" id="time">
 					</td>
 				</tr>
 				<tr>
 					<th>공유</th>
-					<td>				
-						<input id="first_radio" class="radio" type="radio" name="share" value="1" checked="checked">공개
-						<input id="second_radio" type="radio" name="share" value="2">비공개
+					<td id="calshare">				
+						<input type="radio" name="share" class="radio" id="first_radio" value="1" checked="checked">공개&emsp;&emsp;
+						<input type="radio" name="share" id="second_radio" value="2">비공개
 					</td>
 				</tr>
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" name="title" size="80">
+						<input type="text" size="100" maxlength="50" name="title" class="insty" id="caltitle">
 					</td>
 				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea rows="20" cols="80" name="content"></textarea>
+				<tr>					
+					<td colspan="2">
+						<textarea rows="19" cols="95" maxlength="4000" name="content" class="insty" id="scrhidden"></textarea>
 					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="일정추가" class="btn btn-primary">
-					</td>
-				</tr>	
+				</tr>				
 			</thead>
 			<tbody></tbody>		
 		</table>
+		<br/>
+		<button type="button" onclick="calendarlist()" class="btn btn-primary">일정목록</button>
+		<input type="submit" value="일정추가" class="btn btn-primary">
 	</form>
 </div>
 
@@ -113,6 +153,10 @@ document.getElementById("date").value = year + "-" + month + "-" + day;
 let d = new Date();
 document.getElementById("time").value = d.getHours() + ":" + d.getMinutes();
 
+
+function calendarlist() {	
+	location.href = "calendarlist.do";
+}
 
 </script>
 </div>
