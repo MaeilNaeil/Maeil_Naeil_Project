@@ -22,14 +22,10 @@
 	padding-left: 10px;
 	height: 30px;
 	margin-top: 10px;
-	border-radius: 5px;
-	font-size: 1em;
 	border-radius: 3px;
 	font-size: 12px;
 }
 
-.save {
-	border-radius: 10px;
 table {
 	margin-left: 50px;
 }
@@ -37,12 +33,9 @@ table {
 #saveBtn {
 	margin-left: 50px;
 	margin-top: 20px;
-	height: 30px;
-	width: 70px;
 }
 
 </style>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -53,29 +46,24 @@ table {
 
 </head>
 <body>
-<div align="center">
 <div align="center" class="title">
 <h1>비밀번호 변경</h1>
-<p>비밀번호는 8자 이상 ~ 16자 이내로 입력하세요.</p><hr/>
 <p><br/>비밀번호는 8자 이상 ~ 16자 이내로 입력하세요.</p><hr/>
 </div>
 <form action="changepwdAf.do" method="post">
 <table>
 	<tr>
 		<td>
-			현재 비밀번호&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" class="box" id="nowpwd" name="employee_password"><br/>
 			현재 비밀번호&emsp;&emsp; <input type="password" class="box" id="nowpwd" name="employee_password"><br/>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			변경할 비밀번호&nbsp;&nbsp;<input type="password" class="box" id="newpwd" name="newpwd"><br/>
 			변경할 비밀번호&emsp;&nbsp;<input type="password" class="box" id="newpwd" name="newpwd"><br/>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			비밀번호 재입력&nbsp; <input type="password" class="box" id="newpwd2"><br/>
 			비밀번호 재입력&emsp; <input type="password" class="box" id="newpwd2"><br/>
 		</td>
 	</tr>
@@ -83,7 +71,6 @@ table {
 				
 	<tr align="center">
 		<td>
-			<input type="button" value="완료" class="save" onclick="send()">
 			<input type="button" value="완료" class="btn btn-info" id="saveBtn" onclick="send()">
 		</td>
 	</tr>

@@ -31,18 +31,53 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 <title>working status1</title>
 
 <style>
+	h3{
+		text-align:center;
+		padding: 20px 0px;
+	}
 	.table{
-		width: 100%;
-		height: 500px;
+		width: 90%;
 		margin: 10px auto;
 		text-align: center;
+		vertical-align: middle;
 	}
-	.table tbody{
-		height: 50px;
+	tr{
+		height: 60px;
+		padding: 8px 0;
+		vertical-align: middle;
+		border-bottom: 1px solid lightgray;
+	}
+	.table td, .table th{
+		vertical-align: middle;
+		padding: 0;
+	}
+	.table thead th{
+		padding: 12px 0;
+	}
+	.absent, .work, .leave, .vacation{
+		padding: 5px 0;
+		width: 80%;
+		margin: 0 auto;
+		border: 0;
+		border-radius: 8px;
+	}
+	.absent{
+		background-color: lightgray;
+	}
+	.work{
+		background-color: lightskyblue;
+		border: 0;
+	}
+	.leave{
+		background-color: lightcoral;
+	}
+	.vacation{
+		background-color: gold;
 	}
 </style>
 </head>
@@ -53,110 +88,109 @@
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
 	
 	<div id="mainContent" class="contentWrap">
-		<h2>일별 근무 현황</h2>
-	<table class="table">
-  		<thead class="thead-dark">
-			<tr>
-				<th scope="col">부서명</th>
-				<th scope="col">이름</th>
-				<th scope="col">근무상태</th>
-				<th scope="col">출근시간</th>
-				<th scope="col">퇴근시간</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for(HashMap<String, Object> status : statusList){
-					// String startWorkTime = (String)status.get("startWorkTime");
-			%>
+	<h3>일별 근무 현황</h3>
+		<table class="table">
+			<col width="100"><col width="120"><col width="100"><col width="200"><col width="200">
+	  		<thead class="thead-dark">
 				<tr>
-					<th scope="row"><%=status.get("departmentName") %></th>
-					<td><%=status.get("employeeName") %></td>
-					<td>
-					<%
-						if(status.get("workingStatus") == null){
-					%>
-							<div class="absent">
-								미출근
-							</div>				
-					<%
-							
-						}else{
-							switch((String)status.get("workingStatus")){
-								case "in" :
-						%>
-								<div class="work">
-									근무중
-								</div>
+					<th scope="col">부서명</th>
+					<th scope="col">이름</th>
+					<th scope="col">근무상태</th>
+					<th scope="col">출근시간</th>
+					<th scope="col">퇴근시간</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for(HashMap<String, Object> status : statusList){
+				%>
+					<tr height="60">
+						<th scope="row"><%=status.get("departmentName") %></th>
+						<td><%=status.get("employeeName") %></td>
+						<td>
 						<%
-									break;
-								case "leave" :
-						%>
-								<div class="leave">
-									퇴근
-								</div>
-						<%
-									break;
-								case "vacation" : 
-						%>
-								<div class="vacation">
-									휴가중
-								</div>
-						<%
-									break;
-								case "absent" :
+							if(status.get("workingStatus") == null){
 						%>
 								<div class="absent">
 									미출근
-								</div>
+								</div>				
 						<%
-									break;
-								default : 
-						%>
-								<div class="absent">
+	
+							}else{
+								switch((String)status.get("workingStatus")){
+									case "in" :
+							%>
+									<div class="work">
+										근무중
+									</div>
+							<%
+										break;
+									case "leave" :
+							%>
+									<div class="leave">
+										퇴근
+									</div>
+							<%
+										break;
+									case "vacation" : 
+							%>
+									<div class="vacation">
+										휴가중
+									</div>
+							<%
+										break;
+									case "absent" :
+							%>
+									<div class="absent">
 										미출근
-								</div>
-						<%			
-									break;
+									</div>
+							<%
+										break;
+									default : 
+							%>
+									<div class="absent">
+											미출근
+									</div>
+							<%			
+										break;
+								}
 							}
-						}
-					%>
-					</td>
-					<!-- “VACATION”, “ABSENT”  -->
-					<td>
-					<%
-						if(status.get("startWorkTime") == null){
-					%>
-						-
-					<%
-						}else{
-					%>
-						<%=status.get("startWorkTime") %>	
-					<%		
-						}					 
-					%>
-					</td>
-					
-					<td>
-					<%
-						if(status.get("leaveWorkTime") == null){
-					%>
-						-
-					<%
-						}else{
-					%>
-						<%=status.get("leaveWorkTime") %>	
-					<%		
-						}					 
-					%>
-					</td>
-				</tr>
-			<%		
-				}
-			%>
-		</tbody>
-	</table>
-</div>
+						%>
+						</td>
+						<!-- “VACATION”, “ABSENT”  -->
+						<td>
+						<%
+								if(status.get("startWorkTime") == null){
+						%>
+
+						<%
+									}else{
+						%>
+							<%=status.get("startWorkTime") %>	
+						<%		
+							}					 
+						%>
+						</td>
+
+						<td>
+						<%
+							if(status.get("leaveWorkTime") == null){
+						%>
+								<%
+							}else{
+						%>
+							<%=status.get("leaveWorkTime") %>	
+						<%		
+							}					 
+						%>
+						</td>
+					</tr>
+				<%		
+					}
+				%>
+			</tbody>
+		</table>
+	</div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </div>
 </body>

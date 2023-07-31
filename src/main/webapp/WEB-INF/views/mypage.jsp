@@ -12,7 +12,6 @@
 	if(dto == null || (dto.getEmployee_id()+"") == "" ||(dto.getEmployee_id()+"") == null) {
 		%>
 		<script>
-		alert("로그인해주세요");
 		alert("다시 로그인해주세요.");
 		location.href="login.do";
 		</script>
@@ -24,7 +23,6 @@
 		} else {
 			lowerFileName = "base.PNG"; 
 		}
-	
 		
 	/* if(lowerFileName != null){
 	System.out.println("lowerFileName 값 확인 : " + lowerFileName);
@@ -43,12 +41,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonGrid.css">
 
 <style>
 #mainContent {
 	margin-top: 50px;
-	padding-left: 200px;
 }
 
 table {
@@ -56,16 +54,14 @@ table {
 }
 
 .imgfile {
-	width:60px;
-	height:75px;
 	
-	width: 100px;
+	width: 150px;
 	height: 150px;
 	border-color: white;
 }
 
 .content {
-    width: 700px;
+    width: 500px;
 }
 
 .mypageval {
@@ -115,7 +111,8 @@ th {
 <hr/>
 
 <div align="center" class="imgContent">
-<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>" alt="프로필 이미지" class="imgfile">
+	<img src="http://localhost:9100/Maeil_Naeil/upload/<%=lowerFileName %>"
+			alt="프로필 이미지" class="imgfile">
 </div>
 
 <form action="upload.do" method="post" enctype="multipart/form-data">

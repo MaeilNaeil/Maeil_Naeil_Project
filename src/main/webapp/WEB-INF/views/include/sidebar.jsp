@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="ssg.com.maeil.dto.MemberDto"%>
+
+<style>
+	.nav_list{
+		font-size: 16px;
+	}
+</style>
+
 <% MemberDto dto = (MemberDto)session.getAttribute("login"); %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -10,11 +17,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <div class="item sidebar-1">
-	<p id="clock"></p>
 	<p id="clock" style="font-size:20px; color:gray;"></p>
 
 	<form action="logout.do">
-		<button type="submit">로그아웃</button>
 		<button type="submit" class="btn btn-secondary">로그아웃</button>
 	</form>
 </div>
@@ -40,11 +45,6 @@ function printTime() {
 	var now = new Date();
 
 	clock.innerHTML =
-	(now.getMonth()+1) + "/" +
-	now.getDate() + " " +
-	now.getHours() + "시 " +
-	now.getMinutes() + "분";
-	/* + now.getSeconds() + " "; */
 	"&emsp;&nbsp;" + (now.getMonth()+1) + " 월 " +
 	now.getDate() + " 일<br>" +
 	now.getHours() + " 시 " +

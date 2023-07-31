@@ -11,8 +11,6 @@
 
 .title {
 	margin-top: 30px;
-	margin-bottom: 50px;
-	
 	margin-bottom: 50px;	
 }
 .content {
@@ -39,21 +37,17 @@
 <body>
 
 <div align="center" class="title">
-<h1>비밀번호 찾기</h1>
 <h3>비밀번호 찾기</h3>
 </div>
 <hr/>
 <div class="content">
 <p>아이디를 입력하세요.</p>
-사원번호 : <input type="text" name="employee_id" id="employee_id" />
 <p>사원번호<p>
 <input type="text" name="employee_id" id="employee_id" class="form-control" />
 </div>
 <hr/>
 <div class="content">
 <p>마이페이지에 등록하신 이메일을 입력하세요.</p>
-이메일 : <input type="text" name="employee_email" id="employee_email" />
-
 <p>이메일</p>
 <input type="text" name="employee_email" id="employee_email" class="form-control" />
 </div>
@@ -61,15 +55,12 @@
 
 <div>
 <p align="center">
-<input type="button" onclick="findpwd()" value="비밀번호 찾기" />
 <input type="button" class="btn btn-outline-dark" onclick="findpwd()" value="비밀번호 찾기" />
 </p>
 </div>
 
 <hr/>
 <p align="center">
-<input type="button" onclick="back()" value="뒤로" />
-<input type="button" onclick="exit()" value="닫기" />
 <input type="button" class="btn btn-outline-dark" onclick="back()" value="뒤로" />
 <input type="button" class="btn btn-outline-dark" onclick="exit()" value="닫기" />
 </p>
