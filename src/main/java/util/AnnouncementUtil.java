@@ -36,4 +36,16 @@ public static String  toDates(String mdate) {
 		
 		return sdf.format(d);
 	}
+public static String titleDot1(String title) {
+	String newTitle;
+	
+	if(title.length() > 10) {
+		newTitle = title.trim().substring(0, 10);
+		newTitle += "...";
+	}else {
+		newTitle = title.trim();
+	}	
+	
+	return newTitle;
+}
 }

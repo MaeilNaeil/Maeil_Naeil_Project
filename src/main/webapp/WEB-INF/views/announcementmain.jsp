@@ -35,9 +35,9 @@
 
 <style type="text/css">
 .center{
-	margin: auto;
-	width: 1000px;
+	margin: 10px 10px 10px 10px;  
 	text-align: center;
+	
 }
 th{
 	background: royalblue;
@@ -45,6 +45,27 @@ th{
 } 
 tr {
    line-height: 12px;   
+}
+#searchT{
+	margin-left:25px;
+	margin-bottom:30px;
+	font-size: 30px;
+}
+.wrap{
+	align-content: center;
+}
+#numbox{
+	padding-top: 30px;
+}
+#searchbox{
+	margin-top: 30px;
+}
+.form-row{
+	margin: 0px;
+
+}
+.insert-a{
+	justify-content: center;
 }
 </style>
 </head>
@@ -64,7 +85,7 @@ tr {
 	<a href="announcementmain.do?choice=type&search=채용">채용</a>
 </div>
 <table class="table table-hover">
-<col width="50"><col width="300"><col width="60"><col width="100"><col width="50">
+<col width="50"><col width="500"><col width="80"><col width="100">
 
 <%
 if(list == null || list.size() == 0){
@@ -81,7 +102,7 @@ if(list == null || list.size() == 0){
 	
 		<tr>
 				<td><%=ann.getType() %></td>			
-				<td style="text-align: left;">				
+				<td style="vertical-align: middle; text-align: left;"">				
 					<a href="announcementdetail.do?seq=<%=ann.getSeq() %>">
 						<%=AnnouncementUtil.titleDot(ann.getTitle()) %>
 					</a>			
@@ -89,53 +110,43 @@ if(list == null || list.size() == 0){
 				<td><%=ann.getEmployee_name() %></td>
 				<td><%=date %></td>		
 		</tr>
-				<% 
-			
-			
+		<% 		
 	}
 }
-			%>
+	%>
 </table>
 
-<div class="form-row align-items-center d-flex justify-content-center align-items-center container">
+<div class="form-row align-items-center d-flex justify-content-center align-items-center container" id="numbox">
 	<div id="pagination" align="center"></div>
 </div>
 					<div align="right">
        					<%
        					if(mem.getAuth()==3){
        						%>
-       						<a href="announcementinsert.do">새글</a>
+       						<h5><a class="insert-a"href="announcementinsert.do">새글</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
        						<%
        					}
-       					%>
-       					
-							<a href="main.do">홈</a>
+       					%>		
 					</div>
 <br>
-<div class="form-row align-items-center d-flex justify-content-center align-items-center container">
+<div class="form-row align-items-center d-flex justify-content-center align-items-center container" id="searhchbox">
 <select id="choice" class="form-control" style="width:auto;">
 	<option value="start">검색</option>
 	<option value="title">제목</option>
 	<option value="content">내용</option>
-	
 </select>
-
-<div class="col-sm-3 my-1" style="width:auto;">
+<div class="search-box">
 	<input type="text" id="search" class="form-control" value="<%=search %>">
 </div>
-
 <button type="button" onclick="searchBtn()" class="btn btn-primary">검색</button>
 </div>
 </div>
-
 <script type="text/javascript">
 function searchBtn() {
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	location.href = "announcementmain.do?choice=" + choice + "&search=" + search;
 }
-
-
 
 $("#pagination").twbsPagination({
 	startPage:<%=pageNumber+1 %>,
@@ -155,7 +166,6 @@ $("#pagination").twbsPagination({
 });
 
 </script>
-
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </div>

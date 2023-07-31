@@ -12,35 +12,53 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/test.css">
-
+<style type="text/css">
+.center{
+	margin: 10px 10px 10px 10px;  	
+}
+table{
+	width: 80%;
+	margin: auto;
+}
+th{
+	text-align: center;
+	padding-left: 70px;
+}
+th,td{
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+input {
+	width: 100%;
+}
+h1{
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
-	
-	  <div id="mainContent" class="contentWrap">
-	  
-<div align="center">
+	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>	
+	  <div id="mainContent" class="contentWrap">	  
+<div class="center">
     <h1>사원가입</h1>
     <hr>
     <form action="newemployeeAf.do" method="post" id="createId">
     <table>
-        <col width="80"><col width="100"><col width="5"><col width="20">
-
+   
         <tr>
             <th>사원이름</th>
-            <td>
+            <td colspan="2">
                 <input type="text" name="employee_name" id="employee_name">
             </td>
         </tr>		
         <tr>
             <th>비밀번호</th>
-            <td>
+            <td colspan="2">
                 <input type="text" name="employee_password" id="employee_password">
             </td>
         </tr>
@@ -49,11 +67,11 @@
             <td>
                 <input type="text" name="emailname" id="emailname" size="20">	
             </td>
-            <td>
+            <td style="text-align: center;">
                 @	
             </td>
-            <td>	
-                <select name="option" id="option">
+            <td style="size: 10px">	
+                <select name="option" id="option" >
                 	<option>선택해주세요</option>
                     <option>naver.com</option>
                     <option>gmail.com</option>
@@ -66,12 +84,6 @@
             <th></th>
             <td colspan="3">
                 <input type="text" name="other_email" id="other_email">
-            </td>
-        </tr>
-        <tr>
-        	<th></th>
-            <td colspan="4">
-                <input type="hidden" id="employee_email" name="employee_email">
             </td>
         </tr>
         <tr>
@@ -88,7 +100,7 @@
         		</select>
         	</td>
         </tr>
-                <tr>
+        <tr>
         	<th>부서번호</th>
         	<td>
         		<input type="text" name="department_id" id="department_id" readonly="readonly">
@@ -109,13 +121,19 @@
         		<input type="text" name="erank" id="erank">
         	</td>
         </tr>
+        <tr>
+        	<th></th>
+            <td colspan="4">
+                <input type="hidden" id="employee_email" name="employee_email">
+            </td>
+        </tr>
     </table>
     <table>
     	 <tr>
-        	<td align="center">
-        		<button type="button" onclick="createId()">작성완료</button>
+        	<td align="right">
+        		<button type="button" onclick="createId()">작성완료</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         	</td>
-        	<td>
+        	<td align="left">
         		<button type="reset">다시 적기</button>
         	</td>
         </tr>
