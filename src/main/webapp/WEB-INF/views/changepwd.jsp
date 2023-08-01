@@ -19,6 +19,7 @@
 }
 
 .box {
+	width: 200px;
 	padding-left: 10px;
 	height: 30px;
 	margin-top: 10px;
@@ -48,7 +49,7 @@ table {
 <body>
 <div align="center" class="title">
 <h1>비밀번호 변경</h1>
-<p><br/>비밀번호는 8자 이상 ~ 16자 이내로 입력하세요.</p><hr/>
+<p><br/>비밀번호는 4자 이상 ~ 8자 이내로 입력하세요.</p><hr/>
 </div>
 <form action="changepwdAf.do" method="post">
 <table>
