@@ -68,10 +68,11 @@ button {
 	
 }
 .footer {
-	align-items: flex-end;
- 	justify-content:center;
- 	font-weight: 400;
+align-items: flex-end;
+    justify-content: right;
+    font-weight: 400;
  	font-size: 12px;
+ 	padding-right: 30px;
 }
 #circle {
   width : 100px;
