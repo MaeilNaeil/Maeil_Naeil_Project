@@ -56,8 +56,8 @@ public class CalendarUtil {
 	
 	public static String maindot3(String msg) {
 		String str = "";
-		if(msg.length() >= 3) {
-			str = msg.substring(0, 3);
+		if(msg.length() >= 5) {
+			str = msg.substring(0, 5);
 			str += "...";
 		} else {
 			str = msg.trim();

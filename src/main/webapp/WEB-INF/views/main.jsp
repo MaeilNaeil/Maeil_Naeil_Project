@@ -229,10 +229,10 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 			<div class="item content-3">					
 					<table width="100%" height="100%">
 					<thead>			
-						<tr height="20">
+						<tr height="40">
 							<td colspan="7" align="center">
 								<%=pp %>&nbsp;<%=p %>&nbsp;&nbsp;			
-								<font style="color: #3c3c3c; font-size: 15px; font-family: sans-serif;">
+								<font style="color: #3c3c3c; font-size: 16px; font-family: sans-serif;">
 								<%=String.format("%d년&nbsp;&nbsp;%2d월", year, month) %>
 								</font>			
 								&nbsp;&nbsp;<%=n %>&nbsp;<%=nn %>
@@ -249,7 +249,7 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 						</tr>
 					</thead>
 					<tbody>
-						<tr height="40" valign="top">
+						<tr height="80" valign="top">
 						<%	
 						for(int i = 1; i < dayOfWeek; i++){
 						%>
@@ -268,7 +268,7 @@ String nn = String.format("<a href='maincalendarlist.do?year=%d&month=%d' style=
 							if((i + dayOfWeek - 1)%7 == 0 && i != lastday){
 						%>
 						</tr>
-						<tr height="40" valign="top">
+						<tr height="80" valign="top">
 						<%
 							}
 						}	

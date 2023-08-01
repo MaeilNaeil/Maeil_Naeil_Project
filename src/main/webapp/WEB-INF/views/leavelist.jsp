@@ -59,6 +59,12 @@
 option:checked{background-color:rgb(216, 217, 218);}
 input[type="checkbox"]:checked{width: 17px; height: 17px;}
 
+p {
+	font-size: 12pt;
+	padding-left: 30px;
+	font-weight: bold;
+	}
+
 th, td {		
 		border-bottom: 1px solid rgb(216, 217, 218);
 		border-left: none;
@@ -118,17 +124,10 @@ th {text-align: center;}
  		  text-align: center;
  		  }
 
-/* body 스크롤바 */
-#bodyscr {overflow: auto;}
-#bodyscr::-webkit-scrollbar {width: 5px;}
-#bodyscr::-webkit-scrollbar {height: 5px;}
-#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
-#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
-  
 </style>
 
 </head>
-<body id="bodyscr">
+<body>
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
@@ -142,6 +141,8 @@ th {text-align: center;}
 </div>
 
 <div align="center" style="outline: none; border: none;">
+<p>어서오세요 <%=login.getEmployee_name() %>님의 휴가관리입니다.&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
+<br/>
 	<form action="leaveaddAf.do" method="post">	
 		<table class="leavetable">	
 		<col width="65"><col width="215"><col width="215"><col width="165"><col width="118"><col width="115">

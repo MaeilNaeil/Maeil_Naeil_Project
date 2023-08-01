@@ -89,22 +89,10 @@ th {text-align: center;}
 				}
 				
 
-/* 스크롤바 */
-#detailcontent::-webkit-scrollbar {width: 10px;}
-#detailcontent::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
-#detailcontent::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
-
-/* body 스크롤바 */
-#bodyscr {overflow: auto;}
-#bodyscr::-webkit-scrollbar {width: 5px;}
-#bodyscr::-webkit-scrollbar {height: 5px;}
-#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
-#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
-
 </style>
 
 </head>
-<body id="bodyscr">
+<body>
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>

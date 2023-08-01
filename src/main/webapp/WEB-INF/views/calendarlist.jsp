@@ -60,17 +60,10 @@ p {
 
 .sat{color: blue;}
 
-/* body 스크롤바 */
-#bodyscr {overflow: auto;}
-#bodyscr::-webkit-scrollbar {width: 5px;}
-#bodyscr::-webkit-scrollbar {height: 5px;}
-#bodyscr::-webkit-scrollbar-thumb {background-color: gray; border-radius: 10px;}
-#bodyscr::-webkit-scrollbar-track {border-radius: 10px; box-shadow: inset 0px 0px 5px white;}
-
 </style>
 
 </head>
-<body id="bodyscr">
+<body>
 <div class="wrap">
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp"></jsp:include>
@@ -135,7 +128,7 @@ p {
 
 
 <div align="center">
-<p>어서오세요 <%=login.getEmployee_id() %>님, <%=login.getDepartment_name() %>의 일정입니다.&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<p>
+<p>어서오세요 <%=login.getEmployee_name() %>님, <%=login.getDepartment_name() %>의 일정입니다.&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<p>
 	<table>
 	<col width="120"><col width="120"><col width="120"><col width="120">
 	<col width="120"><col width="120"><col width="120">	
